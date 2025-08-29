@@ -10,24 +10,38 @@
     body {
       margin: 0;
       font-family: 'Raleway', sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      color: #222;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Dark gradient background */
+      color: #eee;
       overflow-x: hidden;
     }
 
-    /* ✅ Gradient header */
+    /* 🌌 Starry night header */
     header {
-      background: linear-gradient(90deg, #ff6a88, #ee9ca7, #ffdde1);
       position: sticky;
       top: 0;
       width: 100%;
       z-index: 100;
-      animation: slideDown 1s ease forwards;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      overflow: hidden;
     }
 
-    @keyframes slideDown {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(0); }
+    /* Create stars effect */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      opacity: 0.5;
+      animation: twinkle 5s infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.3; }
+      to { opacity: 0.7; }
     }
 
     nav {
@@ -36,12 +50,15 @@
       align-items: center;
       padding: 1rem 2rem;
       color: #fff;
+      position: relative;
+      z-index: 1;
     }
 
     .logo {
       font-family: 'Playfair Display', serif;
       font-size: 1.5rem;
       color: #fff;
+      text-shadow: 0 0 10px #fff, 0 0 20px #8ecae6;
     }
 
     .nav-links {
@@ -55,10 +72,11 @@
       color: #fff;
       font-weight: 700;
       transition: color 0.3s, transform 0.3s;
+      text-shadow: 0 0 5px #fff;
     }
 
     .nav-links a:hover {
-      color: #222;
+      color: #ffd166;
       transform: scale(1.1);
     }
 
@@ -78,6 +96,7 @@
       font-size: 3rem;
       font-family: 'Playfair Display', serif;
       margin-bottom: 1rem;
+      text-shadow: 0 0 10px #fff, 0 0 20px #8ecae6;
     }
 
     .gallery {
@@ -113,12 +132,13 @@
 
     section {
       padding: 4rem 2rem;
-      background: #fff8f8cc;
+      background: rgba(255, 255, 255, 0.08);
       margin: 2rem;
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       opacity: 0;
       animation: fadeIn 1.5s forwards;
+      color: #fff;
     }
 
     section h2 {
@@ -126,6 +146,7 @@
       font-size: 2rem;
       margin-bottom: 1rem;
       text-align: center;
+      text-shadow: 0 0 5px #fff;
     }
 
     #about p, #contact p {
@@ -138,10 +159,11 @@
     footer {
       text-align: center;
       padding: 1rem;
-      background: rgba(0,0,0,0.7);
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       color: #fff;
       margin-top: 2rem;
       animation: fadeIn 2s ease forwards;
+      text-shadow: 0 0 5px #fff;
     }
   </style>
 </head>
