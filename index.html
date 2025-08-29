@@ -78,7 +78,7 @@
       padding: 6rem 2rem;
       color: #fff;
       animation: fadeIn 2s ease forwards;
-      background-size: contain;  /* 👈 ensures full image is visible */
+      background-size: cover;   /* 👈 immersive fullscreen */
       background-repeat: no-repeat;
       background-position: center;
       min-height: 80vh;
@@ -179,7 +179,7 @@
   <section id="portfolio">
     <h2>My Artworks</h2>
     <div class="gallery">
-      <!-- ✅ Images open in new tab -->
+      <!-- ✅ 19 clickable artworks -->
       <a href="images/art1.jpg" target="_blank"><img src="images/art1.jpg" alt="Artwork 1"></a>
       <a href="images/art2.jpg" target="_blank"><img src="images/art2.jpg" alt="Artwork 2"></a>
       <a href="images/art3.jpg" target="_blank"><img src="images/art3.jpg" alt="Artwork 3"></a>
@@ -251,8 +251,8 @@
       currentIndex = (currentIndex + 1) % images.length;
     }
 
-    setInterval(changeBackground, 5000); // change every 5 sec
-    changeBackground(); // initial load
+    setInterval(changeBackground, 5000); // every 5 seconds
+    changeBackground(); // first load
   </script>
 </body>
 </html>
