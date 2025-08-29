@@ -10,17 +10,24 @@
     body {
       margin: 0;
       font-family: 'Raleway', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* dark night gradient */
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Dark night gradient */
       color: #fff;
       overflow-x: hidden;
     }
 
+    /* Header */
     header {
-      background: url('images/starry-night.jpg') no-repeat center center/cover;
+      background: rgba(0,0,0,0.85);
       position: sticky;
       top: 0;
       width: 100%;
       z-index: 100;
+      animation: slideDown 1s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
 
     nav {
@@ -34,18 +41,17 @@
     .logo {
       display: flex;
       align-items: center;
+      gap: 10px;
       font-family: 'Playfair Display', serif;
       font-size: 1.5rem;
       font-weight: bold;
     }
 
-    .profile-pic {
+    .logo img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
       object-fit: cover;
-      margin-right: 10px;
-      border: 2px solid #ffdde1;
     }
 
     .nav-links {
@@ -71,21 +77,29 @@
       text-align: center;
       padding: 6rem 2rem;
       color: #fff;
-      background-size: cover;
+      animation: fadeIn 2s ease forwards;
+      background-size: contain;  /* 👈 ensures full image is visible */
+      background-repeat: no-repeat;
       background-position: center;
-      background-attachment: fixed;
-      transition: background-image 1s ease-in-out;
-      min-height: 60vh;
+      min-height: 80vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .hero h2 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-family: 'Playfair Display', serif;
       margin-bottom: 1rem;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: inline-block;
     }
 
     .gallery {
@@ -109,7 +123,7 @@
 
     section {
       padding: 4rem 2rem;
-      background: rgba(255,255,255,0.05);
+      background: #fff8f822;
       margin: 2rem;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
@@ -143,7 +157,7 @@
   <header>
     <nav>
       <div class="logo">
-        <img src="images/profile.jpg" alt="Artist Himanshu Singh" class="profile-pic">
+        <img src="images/profile.jpg" alt="Profile Picture">
         Artist Himanshu Singh
       </div>
       <ul class="nav-links">
@@ -155,7 +169,7 @@
     </nav>
   </header>
 
-  <!-- Home Section (Hero Slideshow) -->
+  <!-- Hero Section with Slideshow -->
   <section id="home" class="hero">
     <h2>Welcome to My Art Portfolio</h2>
     <p>Explore my latest works and projects.</p>
@@ -165,7 +179,7 @@
   <section id="portfolio">
     <h2>My Artworks</h2>
     <div class="gallery">
-      <!-- ✅ 19 clickable images -->
+      <!-- ✅ Images open in new tab -->
       <a href="images/art1.jpg" target="_blank"><img src="images/art1.jpg" alt="Artwork 1"></a>
       <a href="images/art2.jpg" target="_blank"><img src="images/art2.jpg" alt="Artwork 2"></a>
       <a href="images/art3.jpg" target="_blank"><img src="images/art3.jpg" alt="Artwork 3"></a>
@@ -205,42 +219,40 @@
     <p>&copy; 2025 Artist Himanshu Singh. All rights reserved.</p>
   </footer>
 
-  <!-- Slideshow Script -->
+  <!-- ✅ Hero Slideshow Script -->
   <script>
-    const hero = document.querySelector('.hero');
     const images = [
-      'images/art1.jpg',
-      'images/art2.jpg',
-      'images/art3.jpg',
-      'images/art4.jpg',
-      'images/art5.jpg',
-      'images/art6.jpg',
-      'images/art7.jpg',
-      'images/art8.jpg',
-      'images/art9.jpg',
-      'images/art10.jpg',
-      'images/art11.jpg',
-      'images/art12.jpg',
-      'images/art13.jpg',
-      'images/art14.jpg',
-      'images/art15.jpg',
-      'images/art16.jpg',
-      'images/art17.jpg',
-      'images/art18.jpg',
-      'images/art19.jpg'
+      "images/art1.jpg",
+      "images/art2.jpg",
+      "images/art3.jpg",
+      "images/art4.jpg",
+      "images/art5.jpg",
+      "images/art6.jpg",
+      "images/art7.jpg",
+      "images/art8.jpg",
+      "images/art9.jpg",
+      "images/art10.jpg",
+      "images/art11.jpg",
+      "images/art12.jpg",
+      "images/art13.jpg",
+      "images/art14.jpg",
+      "images/art15.jpg",
+      "images/art16.jpg",
+      "images/art17.jpg",
+      "images/art18.jpg",
+      "images/art19.jpg"
     ];
-    let index = 0;
+
+    let currentIndex = 0;
+    const hero = document.querySelector(".hero");
 
     function changeBackground() {
-      hero.style.backgroundImage = `url('${images[index]}')`;
-      index = (index + 1) % images.length;
+      hero.style.backgroundImage = `url('${images[currentIndex]}')`;
+      currentIndex = (currentIndex + 1) % images.length;
     }
 
-    // change every 5 seconds
-    setInterval(changeBackground, 5000);
-
-    // load first immediately
-    changeBackground();
+    setInterval(changeBackground, 5000); // change every 5 sec
+    changeBackground(); // initial load
   </script>
 </body>
 </html>
