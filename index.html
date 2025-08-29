@@ -10,19 +10,17 @@
     body {
       margin: 0;
       font-family: 'Raleway', sans-serif;
-      background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77, #778da9);
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* dark night gradient */
       color: #fff;
       overflow-x: hidden;
     }
 
-    /* Header */
     header {
-      background: url("https://www.transparenttextures.com/patterns/stardust.png"), #0d1b2a;
+      background: url('images/starry-night.jpg') no-repeat center center/cover;
       position: sticky;
       top: 0;
       width: 100%;
       z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
     nav {
@@ -37,7 +35,7 @@
       display: flex;
       align-items: center;
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: bold;
     }
 
@@ -47,7 +45,7 @@
       border-radius: 50%;
       object-fit: cover;
       margin-right: 10px;
-      border: 2px solid #fff;
+      border: 2px solid #ffdde1;
     }
 
     .nav-links {
@@ -64,66 +62,25 @@
     }
 
     .nav-links a:hover {
-      color: #ffd700;
+      color: #ffdde1;
       transform: scale(1.1);
     }
 
-    /* Hero with slideshow */
     .hero {
-      position: relative;
-      height: 100vh;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       text-align: center;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-size: cover;
-      background-position: center;
-      animation: slideshow 95s infinite;
-      z-index: -1;
-      opacity: 0.7;
-    }
-
-    @keyframes slideshow {
-      0%   { background-image: url("images/art1.jpg"); }
-      5%   { background-image: url("images/art2.jpg"); }
-      10%  { background-image: url("images/art3.jpg"); }
-      15%  { background-image: url("images/art4.jpg"); }
-      20%  { background-image: url("images/art5.jpg"); }
-      25%  { background-image: url("images/art6.jpg"); }
-      30%  { background-image: url("images/art7.jpg"); }
-      35%  { background-image: url("images/art8.jpg"); }
-      40%  { background-image: url("images/art9.jpg"); }
-      45%  { background-image: url("images/art10.jpg"); }
-      50%  { background-image: url("images/art11.jpg"); }
-      55%  { background-image: url("images/art12.jpg"); }
-      60%  { background-image: url("images/art13.jpg"); }
-      65%  { background-image: url("images/art14.jpg"); }
-      70%  { background-image: url("images/art15.jpg"); }
-      75%  { background-image: url("images/art16.jpg"); }
-      80%  { background-image: url("images/art17.jpg"); }
-      85%  { background-image: url("images/art18.jpg"); }
-      90%  { background-image: url("images/art19.jpg"); }
-      100% { background-image: url("images/art1.jpg"); }
+      padding: 6rem 2rem;
+      color: #fff;
+      background: url('images/art1.jpg') no-repeat center center/cover;
+      background-attachment: fixed;
     }
 
     .hero h2 {
       font-size: 3rem;
       font-family: 'Playfair Display', serif;
       margin-bottom: 1rem;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     }
 
-    /* Gallery */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -145,7 +102,7 @@
 
     section {
       padding: 4rem 2rem;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255,255,255,0.05);
       margin: 2rem;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
@@ -156,7 +113,6 @@
       font-size: 2rem;
       margin-bottom: 1rem;
       text-align: center;
-      color: #ffd700;
     }
 
     #about p, #contact p {
@@ -169,7 +125,7 @@
     footer {
       text-align: center;
       padding: 1rem;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.9);
       color: #fff;
       margin-top: 2rem;
     }
@@ -192,35 +148,36 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Home Section -->
   <section id="home" class="hero">
     <h2>Welcome to My Art Portfolio</h2>
-    <p>Explore my journey through watercolor portraits and art expressions.</p>
+    <p>Explore my latest works and projects.</p>
   </section>
 
   <!-- Portfolio Section -->
   <section id="portfolio">
     <h2>My Artworks</h2>
     <div class="gallery">
-      <img src="images/art1.jpg" alt="Artwork 1">
-      <img src="images/art2.jpg" alt="Artwork 2">
-      <img src="images/art3.jpg" alt="Artwork 3">
-      <img src="images/art4.jpg" alt="Artwork 4">
-      <img src="images/art5.jpg" alt="Artwork 5">
-      <img src="images/art6.jpg" alt="Artwork 6">
-      <img src="images/art7.jpg" alt="Artwork 7">
-      <img src="images/art8.jpg" alt="Artwork 8">
-      <img src="images/art9.jpg" alt="Artwork 9">
-      <img src="images/art10.jpg" alt="Artwork 10">
-      <img src="images/art11.jpg" alt="Artwork 11">
-      <img src="images/art12.jpg" alt="Artwork 12">
-      <img src="images/art13.jpg" alt="Artwork 13">
-      <img src="images/art14.jpg" alt="Artwork 14">
-      <img src="images/art15.jpg" alt="Artwork 15">
-      <img src="images/art16.jpg" alt="Artwork 16">
-      <img src="images/art17.jpg" alt="Artwork 17">
-      <img src="images/art18.jpg" alt="Artwork 18">
-      <img src="images/art19.jpg" alt="Artwork 19">
+      <!-- ✅ 19 clickable images -->
+      <a href="images/art1.jpg" target="_blank"><img src="images/art1.jpg" alt="Artwork 1"></a>
+      <a href="images/art2.jpg" target="_blank"><img src="images/art2.jpg" alt="Artwork 2"></a>
+      <a href="images/art3.jpg" target="_blank"><img src="images/art3.jpg" alt="Artwork 3"></a>
+      <a href="images/art4.jpg" target="_blank"><img src="images/art4.jpg" alt="Artwork 4"></a>
+      <a href="images/art5.jpg" target="_blank"><img src="images/art5.jpg" alt="Artwork 5"></a>
+      <a href="images/art6.jpg" target="_blank"><img src="images/art6.jpg" alt="Artwork 6"></a>
+      <a href="images/art7.jpg" target="_blank"><img src="images/art7.jpg" alt="Artwork 7"></a>
+      <a href="images/art8.jpg" target="_blank"><img src="images/art8.jpg" alt="Artwork 8"></a>
+      <a href="images/art9.jpg" target="_blank"><img src="images/art9.jpg" alt="Artwork 9"></a>
+      <a href="images/art10.jpg" target="_blank"><img src="images/art10.jpg" alt="Artwork 10"></a>
+      <a href="images/art11.jpg" target="_blank"><img src="images/art11.jpg" alt="Artwork 11"></a>
+      <a href="images/art12.jpg" target="_blank"><img src="images/art12.jpg" alt="Artwork 12"></a>
+      <a href="images/art13.jpg" target="_blank"><img src="images/art13.jpg" alt="Artwork 13"></a>
+      <a href="images/art14.jpg" target="_blank"><img src="images/art14.jpg" alt="Artwork 14"></a>
+      <a href="images/art15.jpg" target="_blank"><img src="images/art15.jpg" alt="Artwork 15"></a>
+      <a href="images/art16.jpg" target="_blank"><img src="images/art16.jpg" alt="Artwork 16"></a>
+      <a href="images/art17.jpg" target="_blank"><img src="images/art17.jpg" alt="Artwork 17"></a>
+      <a href="images/art18.jpg" target="_blank"><img src="images/art18.jpg" alt="Artwork 18"></a>
+      <a href="images/art19.jpg" target="_blank"><img src="images/art19.jpg" alt="Artwork 19"></a>
     </div>
   </section>
 
