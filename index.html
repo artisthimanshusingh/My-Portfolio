@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Art Portfolio</title>
+  <title>Himanshu Singh</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Playfair+Display:wght@700&display=swap');
 
@@ -15,17 +15,14 @@
       overflow-x: hidden;
     }
 
-<header>
-  <h1>Himanshu Singh</h1>
-  <p>Artist Portfolio</p>
-</header>
-
+    /* ✅ Fixed header CSS */
+    header {
       background: rgba(0,0,0,0.7);
       position: sticky;
       top: 0;
       width: 100%;
       z-index: 100;
-      animation: slideDown 1s ease;
+      animation: slideDown 1s ease forwards; /* 👈 stays visible */
     }
 
     @keyframes slideDown {
@@ -68,7 +65,7 @@
       text-align: center;
       padding: 6rem 2rem;
       color: #fff;
-      animation: fadeIn 2s ease;
+      animation: fadeIn 2s ease forwards;
     }
 
     @keyframes fadeIn {
@@ -143,7 +140,7 @@
       background: rgba(0,0,0,0.7);
       color: #fff;
       margin-top: 2rem;
-      animation: fadeIn 2s ease;
+      animation: fadeIn 2s ease forwards;
     }
   </style>
 </head>
@@ -181,7 +178,7 @@
   <!-- About Section -->
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m Himanshu Singh, an artist passionate about watercolor portraits. I love creating pieces that invites you to feel, reflect, and connect with the beauty of the human experience and nature's embrace.</p>
+    <p>Hello! I’m Himanshu Singh, an artist passionate about watercolor portraits. I love creating pieces that invite you to feel, reflect, and connect with the beauty of the human experience and nature's embrace.</p>
   </section>
 
   <!-- Contact Section -->
@@ -196,8 +193,3 @@
   </footer>
 </body>
 </html>
-
-
-
-
-
