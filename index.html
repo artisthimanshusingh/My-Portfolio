@@ -78,7 +78,7 @@
       padding: 6rem 2rem;
       color: #fff;
       animation: fadeIn 2s ease forwards;
-      background-size: cover;   /* 👈 immersive fullscreen */
+      background-size: cover;   /* immersive fullscreen */
       background-repeat: no-repeat;
       background-position: center;
       min-height: 80vh;
@@ -143,6 +143,17 @@
       line-height: 1.6;
     }
 
+    #contact a {
+      color: #ffdde1;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    #contact a:hover {
+      color: #ff9a9e;
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -179,7 +190,7 @@
   <section id="portfolio">
     <h2>My Artworks</h2>
     <div class="gallery">
-      <!-- ✅ 19 clickable artworks -->
+      <!-- 19 artworks -->
       <a href="images/art1.jpg" target="_blank"><img src="images/art1.jpg" alt="Artwork 1"></a>
       <a href="images/art2.jpg" target="_blank"><img src="images/art2.jpg" alt="Artwork 2"></a>
       <a href="images/art3.jpg" target="_blank"><img src="images/art3.jpg" alt="Artwork 3"></a>
@@ -213,22 +224,22 @@
     <h2>Contact</h2>
     <p>Email: <a href="mailto:artistherapy001@gmail.com">artistherapy001@gmail.com</a></p>
     <p>Instagram: <a href="https://www.instagram.com/artisthimanshusingh" target="_blank">@artisthimanshusingh</a></p>
+    <p>YouTube: <a href="http://www.youtube.com/@artisthimanshu6603" target="_blank">artisthimanshu6603</a></p>
+    <p>TikTok: <a href="https://www.tiktok.com/@artist.himanshu?_t=ZN-8zI3ENzr3Ru&_r=1" target="_blank">@artisthimanshu</a></p>
   </section>
 
   <footer>
     <p>&copy; 2025 Artist Himanshu Singh. All rights reserved.</p>
   </footer>
 
-  <!-- ✅ Hero Slideshow Script -->
+  <!-- Hero Slideshow Script -->
   <script>
     const images = [
       "images/art1.jpg",
       "images/art2.jpg",
-      "images/art3.jpg",
       "images/art4.jpg",
       "images/art5.jpg",
       "images/art6.jpg",
-      "images/art7.jpg",
       "images/art8.jpg",
       "images/art9.jpg",
       "images/art10.jpg",
@@ -252,7 +263,7 @@
     }
 
     setInterval(changeBackground, 5000); // every 5 seconds
-    changeBackground(); // first load
+    changeBackground();
   </script>
 </body>
 </html>
