@@ -66,12 +66,19 @@
       transform: scale(1.1);
     }
 
+    /* Hero Slideshow */
     .hero {
       text-align: center;
       padding: 6rem 2rem;
       color: #fff;
-      background: url('images/art1.jpg') no-repeat center center/cover;
+      background-size: cover;
+      background-position: center;
       background-attachment: fixed;
+      transition: background-image 1s ease-in-out;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .hero h2 {
@@ -148,7 +155,7 @@
     </nav>
   </header>
 
-  <!-- Home Section -->
+  <!-- Home Section (Hero Slideshow) -->
   <section id="home" class="hero">
     <h2>Welcome to My Art Portfolio</h2>
     <p>Explore my latest works and projects.</p>
@@ -197,5 +204,43 @@
   <footer>
     <p>&copy; 2025 Artist Himanshu Singh. All rights reserved.</p>
   </footer>
+
+  <!-- Slideshow Script -->
+  <script>
+    const hero = document.querySelector('.hero');
+    const images = [
+      'images/art1.jpg',
+      'images/art2.jpg',
+      'images/art3.jpg',
+      'images/art4.jpg',
+      'images/art5.jpg',
+      'images/art6.jpg',
+      'images/art7.jpg',
+      'images/art8.jpg',
+      'images/art9.jpg',
+      'images/art10.jpg',
+      'images/art11.jpg',
+      'images/art12.jpg',
+      'images/art13.jpg',
+      'images/art14.jpg',
+      'images/art15.jpg',
+      'images/art16.jpg',
+      'images/art17.jpg',
+      'images/art18.jpg',
+      'images/art19.jpg'
+    ];
+    let index = 0;
+
+    function changeBackground() {
+      hero.style.backgroundImage = `url('${images[index]}')`;
+      index = (index + 1) % images.length;
+    }
+
+    // change every 5 seconds
+    setInterval(changeBackground, 5000);
+
+    // load first immediately
+    changeBackground();
+  </script>
 </body>
 </html>
