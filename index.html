@@ -4,18 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artist Himanshu Singh</title>
+
+  <!-- Font Awesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Playfair+Display:wght@700&display=swap');
 
     body {
       margin: 0;
       font-family: 'Raleway', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Dark night gradient */
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       color: #fff;
       overflow-x: hidden;
     }
 
-    /* Header */
     header {
       background: rgba(0,0,0,0.85);
       position: sticky;
@@ -72,13 +75,12 @@
       transform: scale(1.1);
     }
 
-    /* Hero Slideshow */
     .hero {
       text-align: center;
       padding: 6rem 2rem;
       color: #fff;
       animation: fadeIn 2s ease forwards;
-      background-size: cover;   /* immersive fullscreen */
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       min-height: 80vh;
@@ -143,15 +145,23 @@
       line-height: 1.6;
     }
 
-    #contact a {
-      color: #ffdde1;
-      font-weight: bold;
-      text-decoration: none;
-      transition: color 0.3s;
+    /* Social icons */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
     }
 
-    #contact a:hover {
+    .social-links a {
+      font-size: 2rem;
+      color: #ffdde1;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .social-links a:hover {
       color: #ff9a9e;
+      transform: scale(1.2);
     }
 
     footer {
@@ -180,17 +190,17 @@
     </nav>
   </header>
 
-  <!-- Hero Section with Slideshow -->
+  <!-- Hero Section -->
   <section id="home" class="hero">
     <h2>Welcome to My Art Portfolio</h2>
     <p>Explore my latest works and projects.</p>
   </section>
 
-  <!-- Portfolio Section -->
+  <!-- Portfolio -->
   <section id="portfolio">
     <h2>My Artworks</h2>
     <div class="gallery">
-      <!-- 19 artworks -->
+      <!-- Example 19 artworks -->
       <a href="images/art1.jpg" target="_blank"><img src="images/art1.jpg" alt="Artwork 1"></a>
       <a href="images/art2.jpg" target="_blank"><img src="images/art2.jpg" alt="Artwork 2"></a>
       <a href="images/art3.jpg" target="_blank"><img src="images/art3.jpg" alt="Artwork 3"></a>
@@ -213,33 +223,38 @@
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- About -->
   <section id="about">
     <h2>About Me</h2>
     <p>Hello! I’m Himanshu Singh, an artist passionate about watercolor portraits. I love creating pieces that invite you to feel, reflect, and connect with the beauty of the human experience and nature's embrace.</p>
   </section>
 
-  <!-- Contact Section -->
+  <!-- Contact -->
   <section id="contact">
     <h2>Contact</h2>
     <p>Email: <a href="mailto:artistherapy001@gmail.com">artistherapy001@gmail.com</a></p>
-    <p>Instagram: <a href="https://www.instagram.com/artisthimanshusingh" target="_blank">@artisthimanshusingh</a></p>
-    <p>YouTube: <a href="http://www.youtube.com/@artisthimanshu6603" target="_blank">artisthimanshu6603</a></p>
-    <p>TikTok: <a href="https://www.tiktok.com/@artist.himanshu?_t=ZN-8zI3ENzr3Ru&_r=1" target="_blank">@artisthimanshu</a></p>
+
+    <div class="social-links">
+      <a href="https://www.instagram.com/artisthimanshusingh" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/yourchannel" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@yourusername" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
   </section>
 
   <footer>
     <p>&copy; 2025 Artist Himanshu Singh. All rights reserved.</p>
   </footer>
 
-  <!-- Hero Slideshow Script -->
+  <!-- Hero Slideshow -->
   <script>
     const images = [
       "images/art1.jpg",
       "images/art2.jpg",
+      "images/art3.jpg",
       "images/art4.jpg",
       "images/art5.jpg",
       "images/art6.jpg",
+      "images/art7.jpg",
       "images/art8.jpg",
       "images/art9.jpg",
       "images/art10.jpg",
@@ -262,7 +277,7 @@
       currentIndex = (currentIndex + 1) % images.length;
     }
 
-    setInterval(changeBackground, 5000); // every 5 seconds
+    setInterval(changeBackground, 5000);
     changeBackground();
   </script>
 </body>
