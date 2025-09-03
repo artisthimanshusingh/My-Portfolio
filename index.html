@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Artist Himanshu Singh</title>
 
   <!-- Fonts & Icons -->
@@ -15,93 +15,63 @@
       --card:#203a43; --accent:#ffb703; --accent-2:#219ebc;
       --text:#f4f7fb;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:'Raleway',sans-serif; color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #182c47 0%, #0b132b 60%, #000 100%),
-        linear-gradient(160deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
-      min-height:100vh; overflow-x:hidden;
-    }
-    body::before{
-      content:"";
-      position:fixed; inset:0; z-index:-1;
-      background:
-        radial-gradient(2px 2px at 20% 30%, #ffffffcc 40%, transparent 41%) repeat,
-        radial-gradient(1.5px 1.5px at 70% 60%, #ffffff99 40%, transparent 41%) repeat,
-        radial-gradient(1.2px 1.2px at 40% 80%, #ffffff80 40%, transparent 41%) repeat;
-      background-size: 220px 180px, 260px 220px, 300px 260px;
-      opacity:.35;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Raleway',sans-serif;color:var(--text);
+      background:linear-gradient(160deg,var(--bg-1),var(--bg-2) 50%,var(--bg-3));min-height:100vh;}
 
-    /* Header / Nav */
-    header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
-    nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 1.2rem;max-width:1100px;margin:0 auto}
-    .brand{display:flex;align-items:center;gap:.7rem;font-family:'Playfair Display',serif;font-weight:700}
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(255,255,255,.08);}
+    nav{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:.8rem 1.2rem;}
+    .brand{display:flex;align-items:center;gap:.6rem;font-family:'Playfair Display',serif}
     .brand img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #fff}
-    .brand span{font-size:1.1rem}
-    .links{display:flex;gap:1.2rem;list-style:none}
+    .links{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
     .links a{color:var(--text);text-decoration:none;font-weight:700}
     .links a:hover{color:var(--accent)}
 
-    /* Hero (slideshow) */
-    .hero{
-      position:relative; min-height:60vh;
-      display:grid; place-items:center; text-align:center;
-      padding:5rem 1.5rem 3rem;
-      isolation:isolate; 
-      background-size:cover; background-position:center; background-repeat:no-repeat;
-      transition:background-image .6s ease-in-out;
-    }
-    .hero::after{
-      content:""; position:absolute; inset:0; z-index:-1;
-      background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.65));
-    }
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);margin:.2rem 0 .6rem}
-    .hero p{opacity:.95; max-width:750px; margin:0 auto; line-height:1.6}
+    /* Hero slideshow */
+    .hero{position:relative;height:70vh;overflow:hidden}
+    .hero .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease-in-out}
+    .hero .slide.active{opacity:1}
+    .hero-text{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:rgba(0,0,0,.45);color:#fff}
+    .hero-text h1{font-family:'Playfair Display',serif;font-size:2.5rem;margin:.2rem 0 .6rem}
+    .hero-text p{max-width:700px;margin:0 auto;opacity:.9}
 
     /* Sections */
     section{max-width:1100px;margin:0 auto;padding:2rem 1.2rem}
-    h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.3vw,2.2rem);margin:.3rem 0 1rem}
+    h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem}
 
-    /* Gallery cards */
+    /* Gallery */
     .gallery{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-    .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.35)}
-    .card img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;cursor:pointer;transition:transform .35s ease}
-    .card img:hover{transform:scale(1.04)}
-    .meta{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.6rem .8rem}
-    .btn{background:#2c5364;border:none;color:#fff;cursor:pointer;padding:.45rem .8rem;border-radius:10px;font-weight:700}
+    .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.4)}
+    .card img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;cursor:pointer;transition:transform .3s}
+    .card img:hover{transform:scale(1.03)}
+    .meta{display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem}
+    .btn{background:#2c5364;border:none;color:#fff;cursor:pointer;padding:.4rem .7rem;border-radius:10px;font-weight:700}
     .btn:hover{background:var(--accent);color:#000}
-    .likes{font-weight:700;opacity:.95}
+    .likes{font-weight:700}
+
+    /* Comments */
     .comments{padding:.6rem .9rem 1rem}
-    .comments form{display:flex;gap:.5rem;margin:.4rem 0}
-    .comments input{flex:1;padding:.55rem .7rem;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:var(--text)}
-    .comments .send{background:var(--accent-2)}
-    .comments .send:hover{filter:brightness(1.1)}
-    .comment-list{display:grid;gap:.4rem;max-height:160px;overflow:auto;margin-top:.4rem}
-    .comment{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:.5rem .65rem;border-radius:8px}
+    .comments form{display:flex;gap:.5rem}
+    .comments input{flex:1;padding:.45rem .6rem;border-radius:8px;border:1px solid rgba(255,255,255,.2);
+      background:rgba(255,255,255,.08);color:var(--text)}
+    .comment-list{margin-top:.5rem;max-height:120px;overflow-y:auto;display:grid;gap:.4rem}
+    .comment{background:rgba(255,255,255,.08);padding:.4rem .6rem;border-radius:6px}
 
     /* Lightbox */
-    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;place-items:center;z-index:100}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;place-items:center;z-index:100}
     .lightbox.open{display:grid}
-    .lightbox img{max-width:92vw;max-height:85vh;border-radius:12px}
-    .lightbox .close{position:absolute;top:14px;right:18px;font-size:2rem;cursor:pointer}
+    .lightbox img{max-width:90vw;max-height:85vh;border-radius:12px}
+    .lightbox .close{position:absolute;top:14px;right:18px;font-size:2rem;cursor:pointer;color:#fff}
 
     /* Footer */
-    footer{text-align:center;padding:1.3rem 1rem;background:rgba(0,0,0,.55);border-top:1px solid rgba(255,255,255,.08)}
-    .socials{display:flex;justify-content:center;gap:1rem;font-size:1.6rem;margin-top:.4rem}
-    .socials a{color:var(--text);text-decoration:none}
-    .socials a:hover{color:var(--accent)}
-
-    /* Responsive tweaks */
-    @media (max-width:560px){
-      .links{gap:.8rem}
-      .brand span{display:none}
-    }
+    footer{text-align:center;padding:1.3rem 1rem;background:rgba(0,0,0,.55)}
+    .socials{display:flex;justify-content:center;gap:1rem;font-size:1.6rem;margin-top:.5rem}
+    .socials a{color:var(--text)} .socials a:hover{color:var(--accent)}
   </style>
 </head>
 <body>
-
   <!-- Header -->
   <header>
     <nav>
@@ -118,38 +88,141 @@
     </nav>
   </header>
 
-  <!-- Hero (slideshow) -->
+  <!-- Hero Slideshow -->
   <section class="hero" id="hero">
-    <h1>Welcome to My Portfolio</h1>
-    <p>Explore my artwork, videos, and projects. Click images to view full size, like, comment, and share!</p>
+    <img src="images/art1.jpg" class="slide active" alt="Slide 1">
+    <img src="images/art2.jpg" class="slide" alt="Slide 2">
+    <img src="images/art3.jpg" class="slide" alt="Slide 3">
+    <img src="images/art4.jpg" class="slide" alt="Slide 4">
+    <img src="images/art5.jpg" class="slide" alt="Slide 5">
+    <img src="images/art6.jpg" class="slide" alt="Slide 6">
+    <div class="hero-text">
+      <div>
+        <h1>Welcome to My Portfolio</h1>
+        <p>Explore my artwork, videos, and projects. Click images to view full size, like, comment, and share!</p>
+      </div>
+    </div>
   </section>
 
   <!-- Gallery -->
   <section id="gallery">
-    <h2>My Artwork</h2>
+    <h2>My Artworks</h2>
     <div class="gallery">
-      <div class="gallery">
-  <div class="card" data-id="art1"><img src="images/art1.jpg" alt="Artwork 1"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art2"><img src="images/art2.jpg" alt="Artwork 2"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art3"><img src="images/art3.jpg" alt="Artwork 3"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art4"><img src="images/art4.jpg" alt="Artwork 4"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art5"><img src="images/art5.jpg" alt="Artwork 5"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art6"><img src="images/art6.jpg" alt="Artwork 6"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art7"><img src="images/art7.jpg" alt="Artwork 7"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art8"><img src="images/art8.jpg" alt="Artwork 8"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art9"><img src="images/art9.jpg" alt="Artwork 9"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art10"><img src="images/art10.jpg" alt="Artwork 10"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art11"><img src="images/art11.jpg" alt="Artwork 11"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art12"><img src="images/art12.jpg" alt="Artwork 12"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art13"><img src="images/art13.jpg" alt="Artwork 13"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art14"><img src="images/art14.jpg" alt="Artwork 14"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art15"><img src="images/art15.jpg" alt="Artwork 15"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art16"><img src="images/art16.jpg" alt="Artwork 16"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art17"><img src="images/art17.jpg" alt="Artwork 17"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art18"><img src="images/art18.jpg" alt="Artwork 18"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-  <div class="card" data-id="art19"><img src="images/art19.jpg" alt="Artwork 19"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..." required><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
-</div>
+      <!-- 1..19 explicit cards -->
+      <div class="card" data-id="art1">
+        <img src="images/art1.jpg" alt="Artwork 1">
+        <div class="meta"><button class="btn like" data-id="art1">❤️ Like</button><span class="likes" data-id="art1">0</span><button class="btn share" data-id="art1">🔗 Share</button></div>
+        <div class="comments"><form data-id="art1"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art1"></div></div>
+      </div>
 
+      <div class="card" data-id="art2">
+        <img src="images/art2.jpg" alt="Artwork 2">
+        <div class="meta"><button class="btn like" data-id="art2">❤️ Like</button><span class="likes" data-id="art2">0</span><button class="btn share" data-id="art2">🔗 Share</button></div>
+        <div class="comments"><form data-id="art2"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art2"></div></div>
+      </div>
+
+      <div class="card" data-id="art3">
+        <img src="images/art3.jpg" alt="Artwork 3">
+        <div class="meta"><button class="btn like" data-id="art3">❤️ Like</button><span class="likes" data-id="art3">0</span><button class="btn share" data-id="art3">🔗 Share</button></div>
+        <div class="comments"><form data-id="art3"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art3"></div></div>
+      </div>
+
+      <div class="card" data-id="art4">
+        <img src="images/art4.jpg" alt="Artwork 4">
+        <div class="meta"><button class="btn like" data-id="art4">❤️ Like</button><span class="likes" data-id="art4">0</span><button class="btn share" data-id="art4">🔗 Share</button></div>
+        <div class="comments"><form data-id="art4"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art4"></div></div>
+      </div>
+
+      <div class="card" data-id="art5">
+        <img src="images/art5.jpg" alt="Artwork 5">
+        <div class="meta"><button class="btn like" data-id="art5">❤️ Like</button><span class="likes" data-id="art5">0</span><button class="btn share" data-id="art5">🔗 Share</button></div>
+        <div class="comments"><form data-id="art5"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art5"></div></div>
+      </div>
+
+      <div class="card" data-id="art6">
+        <img src="images/art6.jpg" alt="Artwork 6">
+        <div class="meta"><button class="btn like" data-id="art6">❤️ Like</button><span class="likes" data-id="art6">0</span><button class="btn share" data-id="art6">🔗 Share</button></div>
+        <div class="comments"><form data-id="art6"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art6"></div></div>
+      </div>
+
+      <div class="card" data-id="art7">
+        <img src="images/art7.jpg" alt="Artwork 7">
+        <div class="meta"><button class="btn like" data-id="art7">❤️ Like</button><span class="likes" data-id="art7">0</span><button class="btn share" data-id="art7">🔗 Share</button></div>
+        <div class="comments"><form data-id="art7"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art7"></div></div>
+      </div>
+
+      <div class="card" data-id="art8">
+        <img src="images/art8.jpg" alt="Artwork 8">
+        <div class="meta"><button class="btn like" data-id="art8">❤️ Like</button><span class="likes" data-id="art8">0</span><button class="btn share" data-id="art8">🔗 Share</button></div>
+        <div class="comments"><form data-id="art8"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art8"></div></div>
+      </div>
+
+      <div class="card" data-id="art9">
+        <img src="images/art9.jpg" alt="Artwork 9">
+        <div class="meta"><button class="btn like" data-id="art9">❤️ Like</button><span class="likes" data-id="art9">0</span><button class="btn share" data-id="art9">🔗 Share</button></div>
+        <div class="comments"><form data-id="art9"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art9"></div></div>
+      </div>
+
+      <div class="card" data-id="art10">
+        <img src="images/art10.jpg" alt="Artwork 10">
+        <div class="meta"><button class="btn like" data-id="art10">❤️ Like</button><span class="likes" data-id="art10">0</span><button class="btn share" data-id="art10">🔗 Share</button></div>
+        <div class="comments"><form data-id="art10"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art10"></div></div>
+      </div>
+
+      <div class="card" data-id="art11">
+        <img src="images/art11.jpg" alt="Artwork 11">
+        <div class="meta"><button class="btn like" data-id="art11">❤️ Like</button><span class="likes" data-id="art11">0</span><button class="btn share" data-id="art11">🔗 Share</button></div>
+        <div class="comments"><form data-id="art11"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art11"></div></div>
+      </div>
+
+      <div class="card" data-id="art12">
+        <img src="images/art12.jpg" alt="Artwork 12">
+        <div class="meta"><button class="btn like" data-id="art12">❤️ Like</button><span class="likes" data-id="art12">0</span><button class="btn share" data-id="art12">🔗 Share</button></div>
+        <div class="comments"><form data-id="art12"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art12"></div></div>
+      </div>
+
+      <div class="card" data-id="art13">
+        <img src="images/art13.jpg" alt="Artwork 13">
+        <div class="meta"><button class="btn like" data-id="art13">❤️ Like</button><span class="likes" data-id="art13">0</span><button class="btn share" data-id="art13">🔗 Share</button></div>
+        <div class="comments"><form data-id="art13"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art13"></div></div>
+      </div>
+
+      <div class="card" data-id="art14">
+        <img src="images/art14.jpg" alt="Artwork 14">
+        <div class="meta"><button class="btn like" data-id="art14">❤️ Like</button><span class="likes" data-id="art14">0</span><button class="btn share" data-id="art14">🔗 Share</button></div>
+        <div class="comments"><form data-id="art14"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art14"></div></div>
+      </div>
+
+      <div class="card" data-id="art15">
+        <img src="images/art15.jpg" alt="Artwork 15">
+        <div class="meta"><button class="btn like" data-id="art15">❤️ Like</button><span class="likes" data-id="art15">0</span><button class="btn share" data-id="art15">🔗 Share</button></div>
+        <div class="comments"><form data-id="art15"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art15"></div></div>
+      </div>
+
+      <div class="card" data-id="art16">
+        <img src="images/art16.jpg" alt="Artwork 16">
+        <div class="meta"><button class="btn like" data-id="art16">❤️ Like</button><span class="likes" data-id="art16">0</span><button class="btn share" data-id="art16">🔗 Share</button></div>
+        <div class="comments"><form data-id="art16"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art16"></div></div>
+      </div>
+
+      <div class="card" data-id="art17">
+        <img src="images/art17.jpg" alt="Artwork 17">
+        <div class="meta"><button class="btn like" data-id="art17">❤️ Like</button><span class="likes" data-id="art17">0</span><button class="btn share" data-id="art17">🔗 Share</button></div>
+        <div class="comments"><form data-id="art17"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art17"></div></div>
+      </div>
+
+      <div class="card" data-id="art18">
+        <img src="images/art18.jpg" alt="Artwork 18">
+        <div class="meta"><button class="btn like" data-id="art18">❤️ Like</button><span class="likes" data-id="art18">0</span><button class="btn share" data-id="art18">🔗 Share</button></div>
+        <div class="comments"><form data-id="art18"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art18"></div></div>
+      </div>
+
+      <div class="card" data-id="art19">
+        <img src="images/art19.jpg" alt="Artwork 19">
+        <div class="meta"><button class="btn like" data-id="art19">❤️ Like</button><span class="likes" data-id="art19">0</span><button class="btn share" data-id="art19">🔗 Share</button></div>
+        <div class="comments"><form data-id="art19"><input type="text" placeholder="Write a comment..." required><button type="submit" class="btn send">Send</button></form><div class="comment-list" data-id="art19"></div></div>
+      </div>
+    </div>
   </section>
 
   <!-- Videos -->
@@ -168,7 +241,7 @@
   <!-- Contact -->
   <section id="contact">
     <h2>Contact Me</h2>
-    <p>Email: <a href="mailto:artistherapy001@gmail.com">artistherapy001@gmail.com</a></p>
+    <p>Email me at: <a href="mailto:artistherapy001@gmail.com">artistherapy001@gmail.com</a></p>
   </section>
 
   <!-- Footer -->
@@ -177,7 +250,7 @@
     <div class="socials">
       <a href="https://www.youtube.com/@artisthimanshu6603" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
       <a href="https://www.instagram.com/artisthimanshusingh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@artist.himanshu" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.tiktok.com/@artist.himanshu?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
       <a href="mailto:artistherapy001@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
     </div>
   </footer>
@@ -188,122 +261,19 @@
     <img src="" alt="Expanded artwork">
   </div>
 
-  <!-- Firebase + Page Logic (Self-contained) -->
-  <script type="module">
-    /* ---------- Hero slideshow (uses your gallery images) ---------- */
-    const heroEl = document.querySelector('.hero');
-    const heroImages = [
-      'images/image1.jpg','images/image2.jpg','images/image3.jpg',
-      'images/image4.jpg','images/image5.jpg','images/image6.jpg'
-    ];
-    let heroIdx = 0;
-    function setHero(bg){ heroEl.style.backgroundImage = `url('${bg}')`; }
-    setHero(heroImages[0]);
-    setInterval(()=>{ heroIdx = (heroIdx+1)%heroImages.length; setHero(heroImages[heroIdx]); }, 4500);
+  <!-- Firebase & App Scripts -->
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="script.js"></script>
 
-    /* ---------- Lightbox ---------- */
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    lightbox.querySelector('.close').addEventListener('click',()=> lightbox.classList.remove('open'));
-    document.querySelectorAll('.card img').forEach(img=>{
-      img.addEventListener('click', ()=>{
-        lightboxImg.src = img.src;
-        lightbox.classList.add('open');
-      });
-    });
-
-    /* ---------- Share helper ---------- */
-    function shareImage(id){
-      const url = `${location.origin}${location.pathname}#${id}`;
-      const title = 'Artwork by Artist Himanshu Singh';
-      if (navigator.share){
-        navigator.share({title, url}).catch(()=>navigator.clipboard.writeText(url));
-      } else {
-        navigator.clipboard.writeText(url);
-        alert('Link copied! You can paste it anywhere.');
-      }
-    }
-
-    /* ---------- Firebase (Firestore) ---------- */
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, arrayUnion, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDDIJ0UeZUs0RzjXtLhfbj-DnvwpeBHjiU",
-      authDomain: "artisthimansusingh-3a9cd.firebaseapp.com",
-      projectId: "artisthimanshusingh-3a9cd",
-      storageBucket: "artisthimanshusingh-3a9cd.firebasestorage.app",
-      messagingSenderId: "553538420194",
-      appId: "1:553538420194:web:2f6725a745bf2230eb8dbb",
-      measurementId: "G-9BM2G3KDMQ"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // Helper: ensure doc exists
-    async function ensureDoc(id){
-      const ref = doc(db, 'artworks', id);
-      const snap = await getDoc(ref);
-      if (!snap.exists()){
-        await setDoc(ref, { likes: 0, comments: [] });
-      }
-      return ref;
-    }
-
-    // Wire up each card
-    document.querySelectorAll('.card').forEach(async (card)=>{
-      const id = card.getAttribute('data-id');               // e.g., "img7"
-      const likeBtn = card.querySelector('.like');
-      const likeCountEl = card.querySelector('.likes');
-      const shareBtn = card.querySelector('.share');
-      const form = card.querySelector('form');
-      const input = card.querySelector('input');
-      const list = card.querySelector('.comment-list');
-
-      const ref = await ensureDoc(id);
-
-      // Live updates
-      onSnapshot(ref, (snap)=>{
-        const data = snap.data() || {likes:0, comments:[]};
-        likeCountEl.textContent = data.likes ?? 0;
-        // render comments
-        list.innerHTML = '';
-        (data.comments || []).slice().reverse().forEach(c=>{
-          const li = document.createElement('div');
-          li.className = 'comment';
-          const date = c.ts?.toDate ? c.ts.toDate() : (c.ts ? new Date(c.ts) : null);
-          const when = date ? ` • ${date.toLocaleString()}` : '';
-          li.textContent = `${c.text || ''}${when}`;
-          list.appendChild(li);
-        });
-      });
-
-      // Like
-      likeBtn.addEventListener('click', async ()=>{
-        await updateDoc(ref, { likes: increment(1) });
-      });
-
-      // Share
-      shareBtn.addEventListener('click', ()=> shareImage(id));
-
-      // Comment
-      form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        const text = (input.value || '').trim();
-        if (!text) return;
-        await updateDoc(ref, { comments: arrayUnion({ text, ts: serverTimestamp() }) });
-        input.value = '';
-      });
-    });
-
-    /* ---------- Optional: jump to image from shared link ---------- */
-    if (location.hash){
-      const id = location.hash.replace('#','');
-      const card = document.querySelector(`.card[data-id="${id}"] img`);
-      if (card){ card.click(); }
-    }
+  <!-- Hero slideshow (simple, non-conflicting) -->
+  <script>
+    const heroSlides = document.querySelectorAll('.hero .slide');
+    let heroIndex = 0;
+    setInterval(()=>{
+      heroSlides[heroIndex].classList.remove('active');
+      heroIndex = (heroIndex + 1) % heroSlides.length;
+      heroSlides[heroIndex].classList.add('active');
+    }, 4000);
   </script>
-
 </body>
 </html>
