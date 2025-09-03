@@ -1,200 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Artist Himanshu Singh</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0d0d0d;
-      color: white;
-      text-align: center;
+    :root{
+      --bg-1:#0b132b; --bg-2:#1c2541; --bg-3:#0f2027;
+      --card:#203a43; --accent:#ffb703; --accent-2:#219ebc;
+      --text:#f4f7fb;
     }
-
-    header {
-      background: url('images/hero1.jpg') center/cover no-repeat;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      animation: changeHero 20s infinite;
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Raleway',sans-serif; color:var(--text);
+      background:linear-gradient(160deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
+      min-height:100vh;
     }
-
-    @keyframes changeHero {
-      0% { background-image: url('images/hero1.jpg'); }
-      25% { background-image: url('images/hero2.jpg'); }
-      50% { background-image: url('images/hero3.jpg'); }
-      75% { background-image: url('images/hero4.jpg'); }
-      100% { background-image: url('images/hero1.jpg'); }
-    }
-
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-
-    nav {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    nav img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid white;
-    }
-
-    nav span {
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: white;
-    }
-
-    section {
-      padding: 50px 20px;
-    }
-
-    #gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      padding: 20px;
-    }
-
-    #gallery img {
-      width: 100%;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    #gallery img:hover {
-      transform: scale(1.05);
-    }
-
-    #videos iframe {
-      max-width: 100%;
-      border-radius: 10px;
-    }
-
-    #contact {
-      background: #111;
-      padding: 40px 20px;
-    }
-
-    #contact h2 {
-      margin-bottom: 20px;
-    }
-
-    #contact a {
-      text-decoration: none;
-    }
+    header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.2rem;max-width:1100px;margin:0 auto;}
+    .brand{display:flex;align-items:center;gap:.7rem;font-family:'Playfair Display',serif;font-weight:700}
+    .brand img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #fff}
+    .links{display:flex;gap:1.2rem;list-style:none}
+    .links a{color:var(--text);text-decoration:none;font-weight:700}
+    .links a:hover{color:var(--accent)}
+    .hero{min-height:60vh;display:grid;place-items:center;text-align:center;padding:4rem 1.2rem;background:rgba(0,0,0,.4);}
+    .hero h1{font-family:'Playfair Display',serif;font-size:2.5rem}
+    .gallery{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+    .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.35);}
+    .card img{width:100%;aspect-ratio:4/5;object-fit:cover;cursor:pointer;transition:.3s}
+    .card img:hover{transform:scale(1.04)}
+    .meta{display:flex;align-items:center;justify-content:space-between;padding:.6rem .8rem}
+    .btn{background:#2c5364;border:none;color:#fff;cursor:pointer;padding:.4rem .8rem;border-radius:8px;font-weight:700}
+    .btn:hover{background:var(--accent);color:#000}
+    .comments{padding:.6rem .8rem 1rem}
+    .comments form{display:flex;gap:.5rem;margin:.4rem 0}
+    .comments input{flex:1;padding:.5rem;border-radius:8px;border:1px solid #444;background:rgba(255,255,255,.1);color:var(--text)}
+    .comments .send{background:var(--accent-2)}
+    .comment-list{max-height:120px;overflow:auto;display:grid;gap:.3rem}
+    .comment{background:rgba(255,255,255,.08);padding:.4rem .6rem;border-radius:6px}
+    footer{text-align:center;padding:1.3rem;background:rgba(0,0,0,.55);}
+    .socials{display:flex;justify-content:center;gap:1rem;font-size:1.6rem;margin-top:.5rem}
+    .socials a{color:var(--text);}
+    .socials a:hover{color:var(--accent)}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;place-items:center;z-index:100}
+    .lightbox.open{display:grid}
+    .lightbox img{max-width:92vw;max-height:85vh;border-radius:12px}
+    .lightbox .close{position:absolute;top:14px;right:18px;font-size:2rem;cursor:pointer}
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+<header>
   <nav>
-    <img src="profile.jpg" alt="Artist Himanshu Singh">
-    <span>Artist Himanshu Singh</span>
+    <div class="brand">
+      <img src="profile.jpg" alt="Artist Himanshu Singh">
+      <span>Artist Himanshu Singh</span>
+    </div>
+    <ul class="links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
+</header>
 
-  <!-- Hero Section -->
-  <header>
-    <h1>Welcome to My Portfolio</h1>
-  </header>
+<section class="hero" id="hero">
+  <h1>Welcome to My Portfolio</h1>
+  <p>Explore my artwork, videos, and projects. Click images to view full size, like, comment, and share!</p>
+</section>
 
-  <!-- Gallery Section -->
-  <section id="gallery">
-    <h2>My Artworks</h2>
-    <div>
-      <img src="images/art1.jpg" alt="Artwork 1">
-      <img src="images/art2.jpg" alt="Artwork 2">
-      <img src="images/art3.jpg" alt="Artwork 3">
-      <img src="images/art4.jpg" alt="Artwork 4">
-      <img src="images/art5.jpg" alt="Artwork 5">
-      <img src="images/art6.jpg" alt="Artwork 6">
-      <img src="images/art7.jpg" alt="Artwork 7">
-      <img src="images/art8.jpg" alt="Artwork 8">
-      <img src="images/art9.jpg" alt="Artwork 9">
-      <img src="images/art10.jpg" alt="Artwork 10">
-      <img src="images/art11.jpg" alt="Artwork 11">
-      <img src="images/art12.jpg" alt="Artwork 12">
-      <img src="images/art13.jpg" alt="Artwork 13">
-      <img src="images/art14.jpg" alt="Artwork 14">
-      <img src="images/art15.jpg" alt="Artwork 15">
-      <img src="images/art16.jpg" alt="Artwork 16">
-      <img src="images/art17.jpg" alt="Artwork 17">
-      <img src="images/art18.jpg" alt="Artwork 18">
-      <img src="images/art19.jpg" alt="Artwork 19">
-    </div>
-  </section>
+<section id="gallery">
+  <h2>My Artwork</h2>
+  <div class="gallery">
+    <!-- 19 artworks -->
+    <div class="card" data-id="img1"><img src="images/image1.jpg"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..."><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
+    <div class="card" data-id="img2"><img src="images/image2.jpg"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..."><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
+    <div class="card" data-id="img3"><img src="images/image3.jpg"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..."><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
+    <!-- repeat until image19 -->
+    <div class="card" data-id="img19"><img src="images/image19.jpg"><div class="meta"><button class="btn like">❤️ Like</button><span class="likes">0</span><button class="btn share">🔗 Share</button></div><div class="comments"><form><input type="text" placeholder="Write a comment..."><button class="btn send">Send</button></form><div class="comment-list"></div></div></div>
+  </div>
+</section>
 
-  <!-- Videos Section -->
-  <section id="videos">
-    <h2>Featured Videos</h2>
+<section id="videos">
+  <h2>Featured Videos</h2>
+  <div class="gallery">
+    <div class="card"><iframe width="100%" height="315" src="https://www.youtube.com/embed/12EtrXQvwk4" frameborder="0" allowfullscreen></iframe></div>
+    <div class="card"><iframe width="100%" height="315" src="https://www.tiktok.com/embed/v2/7543279554341833986" frameborder="0" allowfullscreen></iframe></div>
+  </div>
+</section>
 
-    <!-- YouTube -->
-    <div style="text-align:center; margin-bottom: 2rem;">
-      <iframe width="560" height="315"
-        src="https://www.youtube.com/embed/12EtrXQvwk4"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
+<section id="contact">
+  <h2>Contact Me</h2>
+  <p>Email me at: <a href="mailto:yourmail@gmail.com">yourmail@gmail.com</a></p>
+</section>
 
-    <!-- TikTok -->
-    <div style="text-align:center;">
-      <blockquote class="tiktok-embed"
-        cite="https://www.tiktok.com/@artist.himanshu/video/7543279554341833986"
-        data-video-id="7543279554341833986"
-        style="max-width: 605px; min-width: 325px;">
-        <section>
-          <a target="_blank" title="@artist.himanshu"
-             href="https://www.tiktok.com/@artist.himanshu?refer=embed">
-            @artist.himanshu
-          </a>
-          <p></p>
-        </section>
-      </blockquote>
-      <script async src="https://www.tiktok.com/embed.js"></script>
-    </div>
-  </section>
+<footer>
+  <p>© 2025 Artist Himanshu Singh</p>
+  <div class="socials">
+    <a href="https://www.youtube.com/@artisthimanshu6603" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.instagram.com/artisthimanshusingh" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@artist.himanshu" target="_blank"><i class="fab fa-tiktok"></i></a>
+    <a href="mailto:yourmail@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+</footer>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <div style="display: flex; justify-content: center; gap: 2rem; font-size: 2rem; margin-top: 1rem;">
-      <!-- Gmail -->
-      <a href="mailto:artistherapy001@gmail.com" target="_blank" style="color: white;">
-        <i class="fas fa-envelope"></i>
-      </a>
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/artisthimanshusingh" target="_blank" style="color: #E1306C;">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <!-- YouTube -->
-      <a href="https://www.youtube.com/@artisthimanshusingh" target="_blank" style="color: #FF0000;">
-        <i class="fab fa-youtube"></i>
-      </a>
-      <!-- TikTok -->
-      <a href="https://www.tiktok.com/@artist.himanshu" target="_blank" style="color: #69C9D0;">
-        <i class="fab fa-tiktok"></i>
-      </a>
-    </div>
-  </section>
+<div class="lightbox" id="lightbox">
+  <span class="close">&times;</span>
+  <img src="" alt="Expanded artwork">
+</div>
+
+<!-- Firebase config + logic -->
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
 
 </body>
 </html>
