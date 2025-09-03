@@ -1,601 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Artist Himanshu Singh</title>
-
-  <!-- Icons + Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-
-  <style>
-    :root{
-      --night1:#0f2027; --night2:#203a43; --night3:#2c5364;
-      --glass:rgba(0,0,0,.55); --glass-strong:rgba(0,0,0,.85);
-      --accent:#ffdde1; --accent-2:#ff9a9e;
-      --card: #ffffff10;
-      --shadow: 0 8px 20px rgba(0,0,0,.35);
-      --radius: 20px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin:0; padding:0; scroll-behavior:smooth; }
-    body {
-      font-family: 'Raleway', sans-serif;
-      color: #fff;
-      background: linear-gradient(135deg, var(--night1), var(--night2), var(--night3));
-      overflow-x: hidden;
-    }
-
-    /* Header */
-    header {
-      position: sticky; top: 0; z-index: 1000;
-      background: var(--glass-strong);
-      backdrop-filter: blur(8px);
-      animation: slideDown 0.6s ease both;
-    }
-    @keyframes slideDown { from{transform:translateY(-100%)} to{transform:translateY(0)} }
-
-    nav {
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 1rem; padding: 0.8rem 1.2rem;
-    }
-    .logo { display:flex; align-items:center; gap:.7rem; font-weight:800; font-size:1.1rem; }
-    .logo img { width:40px; height:40px; border-radius:50%; object-fit:cover; }
-    .nav-links { display:flex; gap:1rem; list-style:none; margin:0; padding:0; flex-wrap:wrap; }
-    .nav-links a { color:#fff; text-decoration:none; font-weight:700; padding:.35rem .6rem; border-radius:999px; }
-    .nav-links a:hover { background: #ffffff14; }
-
-    .controls { display:flex; align-items:center; gap:.6rem; }
-    .btn {
-      display:inline-flex; align-items:center; gap:.5rem;
-      background:#ffffff14; border:0; color:#fff; padding:.5rem .8rem; border-radius:999px;
-      cursor:pointer; font-weight:700;
-    }
-    .btn:hover { background:#ffffff25; }
-
-    /* Hero (slideshow) */
-    .hero {
-      position: relative; min-height: 80vh;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      text-align:center; padding: 5rem 1.2rem 6rem;
-      background-size: cover; background-position: center; background-repeat: no-repeat;
-      isolation:isolate;
-    }
-    .hero::after{
-      content:""; position:absolute; inset:0; background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.6));
-      z-index:0;
-    }
-    .hero > * { position: relative; z-index:1; }
-    .hero h1 {
-      font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem);
-      margin:.3rem 0; background:rgba(0,0,0,.5); padding:.5rem 1rem; border-radius:12px; display:inline-block;
-    }
-    .hero p { opacity:.9; margin: .3rem 0 1rem; }
-
-    /* Sections */
-    section {
-      margin: 2rem 1rem; background: var(--card); border-radius: var(--radius);
-      box-shadow: var(--shadow); padding: 2rem 1.2rem;
-    }
-    section h2 {
-      font-family:'Playfair Display', serif; font-size: clamp(1.5rem, 3.2vw, 2.2rem);
-      text-align:center; margin: 0 0 1.2rem;
-    }
-    .center { text-align:center; }
-
-    /* Gallery grid */
-    .gallery {
-      display:grid; gap:1rem;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    }
-    .card {
-      background:#00000030; border-radius:16px; overflow:hidden; box-shadow: var(--shadow);
-      transform: translateY(30px); opacity:0; transition: transform .6s ease, opacity .6s ease;
-    }
-    .card.reveal { transform:translateY(0); opacity:1; }
-    .card img { width:100%; display:block; aspect-ratio: 1/1; object-fit: cover; }
-    .card .meta { display:flex; align-items:center; justify-content:space-between; padding:.6rem .8rem; }
-    .likes { display:flex; align-items:center; gap:.5rem; }
-    .like-btn {
-      background:#ffffff18; border:0; color:#fff; padding:.4rem .7rem; border-radius:10px; cursor:pointer;
-    }
-    .like-btn.liked { background:#ff3b3b44; }
-    .like-btn:hover { background:#ffffff28; }
-    .view-btn {
-      text-decoration:none; color:#fff; background:#ffffff18; padding:.4rem .7rem; border-radius:10px;
-    }
-    .view-btn:hover { background:#ffffff28; }
-
-    /* Lightbox */
-    .lightbox {
-      position: fixed; inset:0; background: rgba(0,0,0,.92); display:none;
-      align-items:center; justify-content:center; padding: 1rem; z-index: 2000;
-    }
-    .lightbox.open { display:flex; }
-    .lb-inner {
-      width:min(1200px, 100%); max-height: 92vh; display:grid; gap:1rem;
-      grid-template-columns: 1fr 340px;
-    }
-    @media (max-width: 900px) { .lb-inner { grid-template-columns: 1fr; } }
-    .lb-image-wrap {
-      position:relative; display:flex; align-items:center; justify-content:center; background:#00000060; border-radius:16px; overflow:hidden;
-    }
-    .lb-image { max-width: 100%; max-height: 92vh; object-fit: contain; }
-    .lb-side {
-      background:#0b0b0b; border-radius:16px; padding:1rem; overflow:auto;
-    }
-    .lb-top { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.6rem; }
-    .lb-title { font-weight:800; }
-    .lb-actions { display:flex; gap:.5rem; align-items:center; flex-wrap: wrap; }
-    .icon-btn {
-      background:#ffffff18; border:0; color:#fff; padding:.45rem .65rem; border-radius:10px; cursor:pointer;
-    }
-    .icon-btn.liked { background:#ff3b3b44; }
-    .icon-btn:hover { background:#ffffff28; }
-    .lb-comments { margin-top:.8rem; display:grid; gap:.6rem; }
-    .comment { background:#ffffff0e; border-radius:10px; padding:.6rem .7rem; }
-    .comment small { opacity:.7; }
-
-    .comment-form { display:grid; gap:.5rem; margin-top:.8rem; }
-    .input, textarea {
-      background:#ffffff12; border:1px solid #ffffff22; color:#fff; border-radius:10px;
-      padding:.55rem .7rem; font:inherit; outline:none;
-    }
-    textarea { min-height: 80px; resize: vertical; }
-    .submit { background:#ffffff22; border:0; color:#fff; padding:.6rem .9rem; border-radius:10px; cursor:pointer; font-weight:800; }
-    .submit:hover { background:#ffffff35; }
-
-    /* Social icons row */
-    .social-links { display:flex; justify-content:center; gap:1.2rem; margin-top:.8rem; }
-    .social-links a { font-size:1.6rem; color: var(--accent); }
-    .social-links a:hover { color: var(--accent-2); }
-
-    /* Testimonials / blog cards */
-    .cards { display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .mini-card { background:#00000030; border-radius:16px; padding:1rem; box-shadow: var(--shadow); }
-
-    /* Footer */
-    footer { text-align:center; padding: 1.2rem; background: var(--glass-strong); margin-top: 2rem; }
-
-    /* Small utilities */
-    .row { display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; }
-    .pill { text-decoration:none; color:#fff; background:#ffffff18; padding:.55rem .8rem; border-radius:999px; }
-    .pill:hover { background:#ffffff28; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <nav>
-      <div class="logo">
-        <img src="images/profile.jpg" alt="Profile" />
-        Artist Himanshu Singh
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to My Portfolio</h1>
+    <p>Explore my work below!</p>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery">
+    <div class="image-card" data-id="image1">
+      <img src="images/pic1.jpg" alt="Artwork 1">
+      <div class="actions">
+        <button class="like-btn" data-id="image1">❤️ Like (<span id="likes-image1">0</span>)</button>
+        <button class="share-btn" data-id="image1">🔗 Share</button>
       </div>
-
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#blog">Updates</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-
-      <div class="controls">
-        <button id="musicToggle" class="btn"><i class="fa fa-play"></i> Music</button>
+      <div class="comments">
+        <input type="text" placeholder="Add a comment..." class="comment-input" data-id="image1">
+        <button class="comment-btn" data-id="image1">Post</button>
+        <ul id="comments-image1"></ul>
       </div>
-    </nav>
-  </header>
-
-  <!-- Hidden audio (optional) -->
-  <audio id="bgMusic" src="audio/bg.mp3" loop></audio>
-
-  <!-- Hero (auto slideshow) -->
-  <section id="home" class="hero">
-    <h1>Welcome to My Art Portfolio</h1>
-    <p>Watercolor portraits & the poetry of everyday life.</p>
-
-    <div class="row" style="margin-top:1rem;">
-      <a class="pill" href="docs/Himanshu_Singh_CV.pdf" target="_blank"><i class="fa fa-file-arrow-down"></i> Download CV</a>
-      <a class="pill" href="#portfolio"><i class="fa fa-images"></i> View Gallery</a>
     </div>
-  </section>
 
-  <!-- Portfolio -->
-  <section id="portfolio">
-    <h2>My Artworks</h2>
-    <div class="gallery" id="gallery"></div>
-  </section>
-
-  <!-- Testimonials -->
-  <section id="testimonials">
-    <h2>Testimonials</h2>
-    <div class="cards">
-      <div class="mini-card">
-        <p>“Himanshu’s watercolors capture emotion with beautiful subtlety. A pleasure to collect.”</p>
-        <p><strong>— A. Verma</strong></p>
+    <div class="image-card" data-id="image2">
+      <img src="images/pic2.jpg" alt="Artwork 2">
+      <div class="actions">
+        <button class="like-btn" data-id="image2">❤️ Like (<span id="likes-image2">0</span>)</button>
+        <button class="share-btn" data-id="image2">🔗 Share</button>
       </div>
-      <div class="mini-card">
-        <p>“Every piece tells a gentle story. The portraits feel alive.”</p>
-        <p><strong>— R. Kapoor</strong></p>
-      </div>
-      <div class="mini-card">
-        <p>“Poetic, calming, and wonderfully crafted. Highly recommend.”</p>
-        <p><strong>— S. Mehta</strong></p>
+      <div class="comments">
+        <input type="text" placeholder="Add a comment..." class="comment-input" data-id="image2">
+        <button class="comment-btn" data-id="image2">Post</button>
+        <ul id="comments-image2"></ul>
       </div>
     </div>
   </section>
 
-  <!-- Blog / Updates -->
-  <section id="blog">
-    <h2>Updates</h2>
-    <div class="cards">
-      <div class="mini-card">
-        <h3>Monsoon Portrait Series</h3>
-        <p>Working on a set of watercolor portraits inspired by monsoon moods and reflections.</p>
-      </div>
-      <div class="mini-card">
-        <h3>Sketchbook Peek</h3>
-        <p>Daily gesture sketches to warm up — experimenting with looser washes and textures.</p>
-      </div>
-      <div class="mini-card">
-        <h3>Upcoming Pop-up</h3>
-        <p>Planning a small pop-up display of originals and signed prints. Date soon!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Embeds -->
-  <section>
-    <h2>Videos</h2>
-    <div class="cards">
-      <div class="mini-card">
-        <h3>YouTube</h3>
-        <!-- Replace with your real video ID -->
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video"
-                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-        </div>
-      </div>
-      <div class="mini-card">
-        <h3>TikTok</h3>
-        <!-- Replace with your real TikTok URL -->
-        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@scout2015/video/6718335390845095173" data-video-id="6718335390845095173" style="max-width: 605px;min-width: 325px;">
-          <section>Loading TikTok…</section>
-        </blockquote>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p class="center">Email: <a href="mailto:artistherapy001@gmail.com">artistherapy001@gmail.com</a></p>
-    <div class="social-links">
-      <a href="https://www.instagram.com/artisthimanshusingh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/yourchannel" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.tiktok.com/@yourusername" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-    </div>
-
-    <h3 class="center" style="margin-top:1.5rem;">Send a Message</h3>
-    <form id="contactForm" class="comment-form" style="max-width:700px;margin:1rem auto 0;">
-      <input class="input" type="text" name="name" placeholder="Your name" required />
-      <input class="input" type="email" name="email" placeholder="Your email" required />
-      <textarea name="message" class="input" placeholder="Your message" required></textarea>
-      <button class="submit" type="submit"><i class="fa fa-paper-plane"></i> Send</button>
-      <p id="contactStatus" class="center" style="opacity:.9;"></p>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Artist Himanshu Singh. All rights reserved.</p>
-  </footer>
-
-  <!-- TikTok embed script -->
-  <script async src="https://www.tiktok.com/embed.js"></script>
-
-  <!-- Firebase (v10 modular CDN) -->
+  <!-- Firebase + App Script -->
   <script type="module">
-    /*********** CONFIGURE FIREBASE HERE ***********/
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { db } from "./firebase.js";
     import {
-      getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection,
-      addDoc, query, orderBy, onSnapshot
-    } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+      doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, query, onSnapshot
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-    // TODO: Replace with your Firebase project config:
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+    // --- LIKE BUTTON ---
+    document.querySelectorAll(".like-btn").forEach(button => {
+      button.addEventListener("click", async () => {
+        const id = button.dataset.id;
+        const docRef = doc(db, "likes", id);
+        const snap = await getDoc(docRef);
 
-    const app = initializeApp(firebaseConfig);
-    const db  = getFirestore(app);
-
-    /*********** HERO SLIDESHOW ***********/
-    const hero = document.querySelector(".hero");
-    const heroImages = [
-      "images/art1.jpg","images/art2.jpg","images/art3.jpg","images/art4.jpg",
-      "images/art5.jpg","images/art6.jpg","images/art7.jpg","images/art8.jpg"
-    ];
-    let heroIndex = 0;
-    function setHero() {
-      hero.style.backgroundImage = `url('${heroImages[heroIndex]}')`;
-      heroIndex = (heroIndex + 1) % heroImages.length;
-    }
-    setHero();
-    setInterval(setHero, 5000);
-
-    /*********** MUSIC TOGGLE ***********/
-    const bgMusic = document.getElementById("bgMusic");
-    const musicToggle = document.getElementById("musicToggle");
-    let playing = false;
-    musicToggle.addEventListener("click", () => {
-      playing ? bgMusic.pause() : bgMusic.play();
-      playing = !playing;
-      musicToggle.innerHTML = playing ? '<i class="fa fa-pause"></i> Music' : '<i class="fa fa-play"></i> Music';
-    });
-
-    /*********** BUILD GALLERY (19 cards) ***********/
-    const gallery = document.getElementById("gallery");
-    const artworks = Array.from({length:19}, (_,i)=>({
-      id: `art${i+1}`,
-      src: `images/art${i+1}.jpg`,
-      title: `Artwork ${i+1}`
-    }));
-
-    function cardTemplate({id, src, title}) {
-      return `
-        <div class="card" data-id="${id}">
-          <img src="${src}" alt="${title}" />
-          <div class="meta">
-            <div class="likes">
-              <button class="like-btn" data-like="${id}"><i class="fa-regular fa-heart"></i> Like</button>
-              <span class="like-count" data-count="${id}">0</span>
-            </div>
-            <a class="view-btn" href="${src}" data-full="${src}" data-open="${id}">View</a>
-          </div>
-        </div>
-      `;
-    }
-
-    gallery.innerHTML = artworks.map(cardTemplate).join("");
-
-    /*********** SCROLL REVEAL ***********/
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('reveal'); observer.unobserve(e.target); } });
-    }, { threshold: .15 });
-    document.querySelectorAll('.card').forEach(el => observer.observe(el));
-
-    /*********** LIGHTBOX ***********/
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-      <div class="lb-inner">
-        <div class="lb-image-wrap">
-          <img class="lb-image" alt="Artwork view" />
-        </div>
-        <div class="lb-side">
-          <div class="lb-top">
-            <div class="lb-title">Artwork</div>
-            <div class="lb-actions">
-              <button class="icon-btn" id="lbPrev"><i class="fa fa-chevron-left"></i></button>
-              <button class="icon-btn" id="lbNext"><i class="fa fa-chevron-right"></i></button>
-              <button class="icon-btn" id="lbLike"><i class="fa-regular fa-heart"></i> Like</button>
-              <button class="icon-btn" id="lbClose"><i class="fa fa-xmark"></i> Close</button>
-            </div>
-          </div>
-          <div><strong>Comments</strong></div>
-          <div class="lb-comments" id="lbComments"></div>
-          <form id="commentForm" class="comment-form">
-            <input class="input" type="text" name="name" placeholder="Your name" required />
-            <textarea name="text" class="input" placeholder="Write a comment…" required></textarea>
-            <button class="submit" type="submit"><i class="fa fa-comment"></i> Post</button>
-          </form>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(lightbox);
-
-    let currentIndex = 0; // index in artworks array
-
-    function openLightbox(idx){
-      currentIndex = idx;
-      const art = artworks[currentIndex];
-      const img = lightbox.querySelector('.lb-image');
-      const title = lightbox.querySelector('.lb-title');
-      img.src = art.src; title.textContent = art.title;
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      loadCounts(art.id);     // update like counts
-      loadComments(art.id);   // load comments
-      updateLbLikeState(art.id);
-    }
-    function closeLightbox(){
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    function nextLightbox(){ openLightbox((currentIndex+1)%artworks.length); }
-    function prevLightbox(){ openLightbox((currentIndex-1+artworks.length)%artworks.length); }
-
-    document.addEventListener('click', (e)=>{
-      const openBtn = e.target.closest('[data-open]');
-      if(openBtn){
-        e.preventDefault();
-        const id = openBtn.getAttribute('data-open');
-        const idx = artworks.findIndex(a=>a.id===id);
-        if(idx>-1) openLightbox(idx);
-      }
-      if(e.target.id==='lbClose' || e.target.closest('#lbClose')) closeLightbox();
-      if(e.target.id==='lbNext'  || e.target.closest('#lbNext'))  nextLightbox();
-      if(e.target.id==='lbPrev'  || e.target.closest('#lbPrev'))  prevLightbox();
-    });
-    document.addEventListener('keydown', (e)=>{
-      if(!lightbox.classList.contains('open')) return;
-      if(e.key==='Escape') closeLightbox();
-      if(e.key==='ArrowRight') nextLightbox();
-      if(e.key==='ArrowLeft') prevLightbox();
-    });
-
-    /*********** LIKES (Firestore + localStorage guard) ***********/
-    const likedKey = (id)=>`liked_${id}`;
-    async function ensureDoc(id){
-      const ref = doc(db, 'artworks', id);
-      const snap = await getDoc(ref);
-      if(!snap.exists()){
-        await setDoc(ref, { likes: 0, createdAt: Date.now() });
-      }
-      return ref;
-    }
-
-    async function loadCounts(id){
-      const ref = doc(db, 'artworks', id);
-      const snap = await getDoc(ref);
-      const count = snap.exists() ? (snap.data().likes||0) : 0;
-      // update both gallery count and lightbox state
-      const countEl = document.querySelector(`[data-count="${id}"]`);
-      if(countEl) countEl.textContent = count;
-      // LB like button count (show next to text)
-      const lbLike = document.getElementById('lbLike');
-      lbLike.dataset.count = count;
-      lbLike.innerHTML = `<i class="fa-regular fa-heart"></i> ${count} Like${count===1?'':'s'}`;
-    }
-    function updateLbLikeState(id){
-      const lbLike = document.getElementById('lbLike');
-      if(localStorage.getItem(likedKey(id))){
-        lbLike.classList.add('liked');
-      } else {
-        lbLike.classList.remove('liked');
-      }
-    }
-
-    async function likeArtwork(id){
-      if(localStorage.getItem(likedKey(id))) return; // prevent repeat from same device
-      const ref = await ensureDoc(id);
-      await updateDoc(ref, { likes: increment(1) });
-      localStorage.setItem(likedKey(id), '1');
-      await loadCounts(id);
-      updateLbLikeState(id);
-      const btn = document.querySelector(`[data-like="${id}"]`);
-      if(btn) btn.classList.add('liked');
-    }
-
-    // Gallery like buttons
-    gallery.addEventListener('click', async (e)=>{
-      const btn = e.target.closest('.like-btn');
-      if(!btn) return;
-      const id = btn.getAttribute('data-like');
-      await likeArtwork(id);
-    });
-
-    // Lightbox like button
-    document.addEventListener('click', async (e)=>{
-      const lbLike = e.target.closest('#lbLike');
-      if(!lbLike) return;
-      const id = artworks[currentIndex].id;
-      await likeArtwork(id);
-    });
-
-    // Initialize counts and like state for gallery
-    (async function initCounts(){
-      for(const a of artworks){
-        await loadCounts(a.id);
-        if(localStorage.getItem(likedKey(a.id))){
-          const btn = document.querySelector(`[data-like="${a.id}"]`);
-          if(btn) btn.classList.add('liked');
+        if (snap.exists()) {
+          await updateDoc(docRef, { count: increment(1) });
+        } else {
+          await setDoc(docRef, { count: 1 });
         }
-      }
-    })();
-
-    /*********** COMMENTS (Firestore) ***********/
-    const commentsDiv = document.getElementById('lbComments');
-    const commentForm = document.getElementById('commentForm');
-    let unsubComments = null;
-
-    function renderComment(docSnap){
-      const d = docSnap.data();
-      const date = new Date(d.createdAt||Date.now());
-      const el = document.createElement('div');
-      el.className = 'comment';
-      el.innerHTML = `<strong>${escapeHtml(d.name||'Anonymous')}</strong><br>${escapeHtml(d.text||'')}
-                      <div><small>${date.toLocaleString()}</small></div>`;
-      return el;
-    }
-
-    function escapeHtml(str){
-      return String(str).replace(/[&<>"']/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' }[s]));
-    }
-
-    function loadComments(artId){
-      // unsubscribe previous
-      if(unsubComments) unsubComments();
-      commentsDiv.innerHTML = 'Loading…';
-      const colRef = collection(db, 'artworks', artId, 'comments');
-      const q = query(colRef, orderBy('createdAt', 'desc'));
-      unsubComments = onSnapshot(q, (snap)=>{
-        commentsDiv.innerHTML = '';
-        if(snap.empty){ commentsDiv.innerHTML = '<div class="comment">No comments yet.</div>'; return; }
-        snap.forEach(docSnap => commentsDiv.appendChild(renderComment(docSnap)));
       });
-    }
-
-    commentForm.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const formData = new FormData(commentForm);
-      const name = (formData.get('name')||'').toString().trim() || 'Anonymous';
-      const text = (formData.get('text')||'').toString().trim();
-      if(!text) return;
-      const artId = artworks[currentIndex].id;
-      const colRef = collection(db, 'artworks', artId, 'comments');
-      await addDoc(colRef, { name, text, createdAt: Date.now() });
-      commentForm.reset();
     });
 
-    /*********** CONTACT FORM → Firestore 'messages' ***********/
-    const contactForm = document.getElementById('contactForm');
-    const contactStatus = document.getElementById('contactStatus');
-    contactForm.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      contactStatus.textContent = 'Sending…';
-      const fd = new FormData(contactForm);
-      const payload = {
-        name:  (fd.get('name')||'').toString(),
-        email: (fd.get('email')||'').toString(),
-        message: (fd.get('message')||'').toString(),
-        createdAt: Date.now()
-      };
-      try{
-        await addDoc(collection(db, 'messages'), payload);
-        contactStatus.textContent = 'Thanks! Your message has been sent.';
-        contactForm.reset();
-      } catch (err){
-        contactStatus.textContent = 'Sorry, something went wrong. Please try again.';
-      }
+    // Real-time like counter
+    ["image1", "image2"].forEach(id => {
+      const docRef = doc(db, "likes", id);
+      onSnapshot(docRef, (snap) => {
+        if (snap.exists()) {
+          document.getElementById(`likes-${id}`).innerText = snap.data().count;
+        }
+      });
     });
 
-    /*********** INITIAL LIGHTBOX WIRING FOR THUMBNAILS ***********/
-    // Clicking image (not just "View" link) also opens lightbox
-    gallery.addEventListener('click', (e)=>{
-      const img = e.target.closest('.card img');
-      if(!img) return;
-      const card = img.closest('.card');
-      if(!card) return;
-      const id = card.getAttribute('data-id');
-      const idx = artworks.findIndex(a=>a.id===id);
-      if(idx>-1) openLightbox(idx);
+    // --- COMMENTS ---
+    document.querySelectorAll(".comment-btn").forEach(button => {
+      button.addEventListener("click", async () => {
+        const id = button.dataset.id;
+        const input = document.querySelector(`.comment-input[data-id="${id}"]`);
+        const text = input.value.trim();
+        if (!text) return;
+
+        await addDoc(collection(db, "comments", id, "items"), {
+          text,
+          timestamp: Date.now()
+        });
+        input.value = "";
+      });
     });
 
-  </script>
+    // Real-time comments
+    ["image1", "image2"].forEach(id => {
+      const q = query(collection(db, "comments", id, "items"));
+      const list = document.getElementById(`comments-${id}`);
 
-  <!-- Minimal inline script (non-module) to avoid FOUC on build -->
-  <script>
-    // Avoid iOS autoplay issues for music by only playing on user interaction (handled above)
+      onSnapshot(q, (snapshot) => {
+        list.innerHTML = "";
+        snapshot.forEach(doc => {
+          const li = document.createElement("li");
+          li.textContent = doc.data().text;
+          list.appendChild(li);
+        });
+      });
+    });
+
+    // --- SHARE BUTTON ---
+    document.querySelectorAll(".share-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const url = window.location.href; // website link
+        if (navigator.share) {
+          navigator.share({
+            title: "Check out this artwork!",
+            url: url
+          });
+        } else {
+          navigator.clipboard.writeText(url);
+          alert("Link copied! You can share it anywhere.");
+        }
+      });
+    });
   </script>
 </body>
 </html>
