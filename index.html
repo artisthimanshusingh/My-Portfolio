@@ -2,382 +2,231 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Artist Himanshu Singh</title>
 
-  <!-- Google Fonts -->
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
-    body {
-      margin: 0;
-      font-family: 'Raleway', sans-serif;
-      background: radial-gradient(circle at top left, #0d1b2a, #1b263b, #000);
-      color: #eee;
-      overflow-x: hidden;
+    :root{
+      --bg-1:#0b132b; --bg-2:#1c2541; --bg-3:#0f2027;
+      --card:#203a43; --accent:#ffb703; --accent-2:#219ebc;
+      --text:#f4f7fb;
     }
 
-    header {
-      background: rgba(0,0,0,0.8);
-      position: sticky;
-      top: 0;
-      width: 100%;
-      z-index: 100;
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:'Raleway',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #182c47 0%, #0b132b 60%, #000 100%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
+      min-height:100dvh;
+      overflow-x:hidden;
     }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      color: #fff;
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:-1;
+      background:
+        radial-gradient(2px 2px at 20% 30%, #ffffffcc 40%, transparent 41%) repeat,
+        radial-gradient(1.5px 1.5px at 70% 60%, #ffffff99 40%, transparent 41%) repeat,
+        radial-gradient(1.2px 1.2px at 40% 80%, #ffffff80 40%, transparent 41%) repeat;
+      background-size: 220px 180px, 260px 220px, 300px 260px;
+      opacity:.35;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: bold;
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
+    nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem; padding:0.9rem 1.2rem;
+      max-width:1100px; margin:0 auto;
+    }
+    .brand{display:flex; align-items:center; gap:.7rem; font-family:'Playfair Display',serif; font-weight:700}
+    .brand img{width:44px; height:44px; border-radius:50%; object-fit:cover; border:2px solid #fff}
+    .brand span{font-size:1.1rem}
+    .links{display:flex; gap:1.2rem; list-style:none; margin:0; padding:0}
+    .links a{color:var(--text); text-decoration:none; font-weight:700}
+    .links a:hover{color:var(--accent)}
 
-    .logo img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    .hero{
+      position:relative; min-height:60vh;
+      display:grid; place-items:center; text-align:center;
+      padding:5rem 1.5rem 3rem;
+      isolation:isolate;
     }
+    .hero::after{
+      content:""; position:absolute; inset:0; z-index:-1;
+      background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.65));
+    }
+    .hero h1{
+      font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.2rem); margin:.2rem 0 .6rem;
+    }
+    .hero p{opacity:.9; max-width:750px; margin:0 auto; line-height:1.6}
 
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
+    section{max-width:1100px; margin:0 auto; padding:2rem 1.2rem}
+    h2{font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3.3vw,2.2rem); margin:.3rem 0 1rem}
 
-    .nav-links a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 700;
-      transition: color 0.3s, transform 0.3s;
+    .gallery{
+      display:grid; gap:14px;
+      grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
     }
+    .card{
+      background:var(--card); border-radius:14px; overflow:hidden;
+      box-shadow:0 10px 24px rgba(0,0,0,.35);
+    }
+    .card img{
+      width:100%; display:block; aspect-ratio:4/5; object-fit:cover;
+      transition:transform .35s ease;
+      cursor:pointer;
+    }
+    .card img:hover{ transform:scale(1.04) }
+    .card .meta{ display:flex; align-items:center; justify-content:space-between; gap:.5rem; padding:.6rem .8rem }
+    .btn{
+      background:#2c5364; border:none; color:#fff; cursor:pointer;
+      padding:.45rem .8rem; border-radius:10px; font-weight:700;
+    }
+    .btn:hover{ background:var(--accent); color:#000 }
+    .likes{font-weight:700; opacity:.95}
 
-    .nav-links a:hover {
-      color: #ffb703;
-      transform: scale(1.1);
+    .comments{ padding:.6rem .9rem 1rem }
+    .comments form{ display:flex; gap:.5rem; margin:.4rem 0 }
+    .comments input{
+      flex:1; padding:.55rem .7rem; border-radius:10px; border:1px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.06); color:var(--text);
     }
+    .comments .send{ background:var(--accent-2) }
+    .comments .send:hover{ filter:brightness(1.1) }
+    .comment-list{ display:grid; gap:.4rem; max-height:160px; overflow:auto; margin-top:.4rem }
+    .comment{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); padding:.5rem .65rem; border-radius:8px }
 
-    .hero {
-      text-align: center;
-      padding: 6rem 2rem;
-      color: #fff;
-      background-size: cover;
-      background-position: center;
-      animation: fadeIn 2s ease forwards;
-      min-height: 60vh;
-    }
+    .lightbox{ position:fixed; inset:0; background:rgba(0,0,0,.92); display:none; place-items:center; z-index:100 }
+    .lightbox.open{ display:grid }
+    .lightbox img{ max-width:92vw; max-height:85vh; border-radius:12px }
+    .lightbox .close{ position:absolute; top:14px; right:18px; font-size:2rem; cursor:pointer }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    footer{ text-align:center; padding:1.3rem 1rem; background:rgba(0,0,0,.55); border-top:1px solid rgba(255,255,255,.08) }
+    .socials{ display:flex; justify-content:center; gap:1rem; font-size:1.6rem; margin-top:.4rem }
+    .socials a{ color:var(--text); text-decoration:none }
+    .socials a:hover{ color:var(--accent) }
 
-    .hero h2 {
-      font-size: 3rem;
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 1rem;
-    }
-
-    /* Gallery */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 2rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    }
-
-    /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 200;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      justify-content: center;
-      align-items: center;
-    }
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 12px;
-    }
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-    }
-
-    /* Socials */
-    .social-icons {
-      text-align: center;
-      margin: 2rem 0;
-    }
-    .social-icons a {
-      margin: 0 15px;
-      font-size: 2rem;
-      color: white;
-      transition: transform 0.3s;
-    }
-    .social-icons a:hover {
-      transform: scale(1.2);
-      color: #ffb703;
-    }
-
-    /* Like & Comments */
-    .interaction {
-      text-align: center;
-      margin: 2rem auto;
-      max-width: 600px;
-    }
-    .interaction button {
-      background: #ffb703;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .interaction button:hover {
-      background: #fb8500;
-    }
-    .comments {
-      margin-top: 1rem;
-      text-align: left;
-    }
-    .comments input {
-      width: 80%;
-      padding: 0.5rem;
-      border-radius: 8px;
-      border: none;
-      margin-right: 0.5rem;
-    }
-    .comments button {
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      background: #219ebc;
-      color: white;
-    }
-    .comment-list {
-      margin-top: 1rem;
-      background: rgba(255,255,255,0.1);
-      padding: 1rem;
-      border-radius: 12px;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: rgba(0,0,0,0.8);
-      color: #fff;
-      margin-top: 2rem;
+    @media (max-width:560px){
+      .links{gap:.8rem}
+      .brand span{display:none}
     }
   </style>
 </head>
-<body>
 
+<body>
   <!-- Header -->
   <header>
     <nav>
-      <div class="logo">
-        <img src="profile.jpg" alt="Profile">
-        Artist Himanshu Singh
+      <div class="brand">
+        <img src="profile.jpg" alt="Artist Himanshu Singh">
+        <span>Artist Himanshu Singh</span>
       </div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#about">About</a></li>
+      <ul class="links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#videos">Videos</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Hero Slideshow -->
-  <section id="home" class="hero">
-    <h2>Welcome to My Art Portfolio</h2>
-    <p>Explore my watercolor portraits and creative works.</p>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <h1>Welcome to My Portfolio</h1>
+    <p>Explore my artwork, videos, and projects. Click images to view full size, like, comment, and share!</p>
   </section>
 
-  <!-- Portfolio -->
-  <section id="portfolio">
-    <h2 style="text-align:center;">My Artworks</h2>
+  <!-- Gallery -->
+  <section id="gallery">
+    <h2>My Artwork</h2>
     <div class="gallery">
-      <!-- 19 images -->
-      <img src="images/art1.jpg" alt="Artwork 1">
-      <img src="images/art2.jpg" alt="Artwork 2">
-      <img src="images/art3.jpg" alt="Artwork 3">
-      <img src="images/art4.jpg" alt="Artwork 4">
-      <img src="images/art5.jpg" alt="Artwork 5">
-      <img src="images/art6.jpg" alt="Artwork 6">
-      <img src="images/art7.jpg" alt="Artwork 7">
-      <img src="images/art8.jpg" alt="Artwork 8">
-      <img src="images/art9.jpg" alt="Artwork 9">
-      <img src="images/art10.jpg" alt="Artwork 10">
-      <img src="images/art11.jpg" alt="Artwork 11">
-      <img src="images/art12.jpg" alt="Artwork 12">
-      <img src="images/art13.jpg" alt="Artwork 13">
-      <img src="images/art14.jpg" alt="Artwork 14">
-      <img src="images/art15.jpg" alt="Artwork 15">
-      <img src="images/art16.jpg" alt="Artwork 16">
-      <img src="images/art17.jpg" alt="Artwork 17">
-      <img src="images/art18.jpg" alt="Artwork 18">
-      <img src="images/art19.jpg" alt="Artwork 19">
+      <!-- Example card (repeat for 19 artworks) -->
+      <div class="card" data-id="img1">
+        <img src="images/image1.jpg" alt="Artwork 1">
+        <div class="meta">
+          <button class="btn like">❤️ Like</button>
+          <span class="likes">0</span>
+          <button class="btn share">🔗 Share</button>
+        </div>
+        <div class="comments">
+          <form>
+            <input type="text" placeholder="Write a comment..." required>
+            <button type="submit" class="btn send">Send</button>
+          </form>
+          <div class="comment-list"></div>
+        </div>
+      </div>
+
+      <div class="card" data-id="img2">
+        <img src="images/image2.jpg" alt="Artwork 2">
+        <div class="meta">
+          <button class="btn like">❤️ Like</button>
+          <span class="likes">0</span>
+          <button class="btn share">🔗 Share</button>
+        </div>
+        <div class="comments">
+          <form>
+            <input type="text" placeholder="Write a comment..." required>
+            <button type="submit" class="btn send">Send</button>
+          </form>
+          <div class="comment-list"></div>
+        </div>
+      </div>
+
+      <!-- Repeat for all artworks -->
     </div>
   </section>
 
-  <!-- Interaction Section -->
-  <div class="interaction">
-    <button id="likeBtn">❤️ Like (<span id="likeCount">0</span>)</button>
-
-    <div class="comments">
-      <input type="text" id="commentInput" placeholder="Write a comment...">
-      <button id="commentBtn">Post</button>
-      <div class="comment-list" id="commentList"></div>
+  <!-- Videos -->
+  <section id="videos">
+    <h2>Featured Videos</h2>
+    <div class="gallery">
+      <div class="card">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/12EtrXQvwk4" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="card">
+        <iframe width="100%" height="315" src="https://www.tiktok.com/embed/v2/7543279554341833986" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
-
-    <button onclick="shareSite()">🔗 Share this site</button>
-  </div>
-
-  <!-- About -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hello! I’m Himanshu Singh, an artist passionate about watercolor portraits. I love creating pieces that invite you to feel, reflect, and connect with the beauty of human expression and nature's embrace.</p>
   </section>
 
   <!-- Contact -->
   <section id="contact">
-    <h2>Contact</h2>
-    <div class="social-icons">
-      <a href="mailto:artistherapy001@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-      <a href="https://www.instagram.com/artisthimanshusingh" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@artist.himanshu" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://www.youtube.com/@artisthimanshu6603" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-    </div>
+    <h2>Contact Me</h2>
+    <p>Email me at: <a href="mailto:yourmail@gmail.com">yourmail@gmail.com</a></p>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Artist Himanshu Singh. All rights reserved.</p>
+    <p>© 2025 Artist Himanshu Singh</p>
+    <div class="socials">
+      <a href="https://www.youtube.com/@artisthimanshu6603" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/artisthimanshusingh" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@artist.himanshu" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="mailto:yourmail@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
   </footer>
 
   <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <span class="close" onclick="closeLightbox()">&times;</span>
-    <img id="lightboxImg" src="" alt="">
+  <div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <img src="" alt="Expanded artwork">
   </div>
 
-  <!-- Firebase -->
-  <script src="firebase.js"></script>
-  <script type="module">
-    import { getDatabase, ref, set, get, child, update, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { app } from "./firebase.js";
-    const db = getDatabase(app);
-
-    // Like system
-    const likeBtn = document.getElementById("likeBtn");
-    const likeCount = document.getElementById("likeCount");
-    const likeRef = ref(db, "likes/count");
-
-    onValue(likeRef, (snapshot) => {
-      likeCount.textContent = snapshot.val() || 0;
-    });
-
-    likeBtn.addEventListener("click", () => {
-      get(likeRef).then(snapshot => {
-        let current = snapshot.val() || 0;
-        set(likeRef, current + 1);
-      });
-    });
-
-    // Comments
-    const commentInput = document.getElementById("commentInput");
-    const commentBtn = document.getElementById("commentBtn");
-    const commentList = document.getElementById("commentList");
-    const commentRef = ref(db, "comments");
-
-    commentBtn.addEventListener("click", () => {
-      const text = commentInput.value.trim();
-      if (!text) return;
-      push(commentRef, { text });
-      commentInput.value = "";
-    });
-
-    onValue(commentRef, (snapshot) => {
-      commentList.innerHTML = "";
-      snapshot.forEach(child => {
-        const p = document.createElement("p");
-        p.textContent = child.val().text;
-        commentList.appendChild(p);
-      });
-    });
-
-    // Lightbox
-    const galleryImgs = document.querySelectorAll(".gallery img");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightboxImg");
-
-    galleryImgs.forEach(img => {
-      img.addEventListener("click", () => {
-        lightbox.style.display = "flex";
-        lightboxImg.src = img.src;
-      });
-    });
-
-    function closeLightbox() {
-      lightbox.style.display = "none";
-    }
-    window.closeLightbox = closeLightbox;
-
-    // Hero Slideshow
-    const hero = document.querySelector(".hero");
-    const heroImages = [
-      "images/art1.jpg","images/art2.jpg","images/art3.jpg","images/art4.jpg",
-      "images/art5.jpg","images/art6.jpg","images/art7.jpg","images/art8.jpg"
-    ];
-    let index = 0;
-    setInterval(() => {
-      hero.style.backgroundImage = `url(${heroImages[index]})`;
-      index = (index + 1) % heroImages.length;
-    }, 4000);
-
-    // Share
-    function shareSite() {
-      const url = "https://artisthimanshusingh.github.io/My-Portfolio/";
-      navigator.clipboard.writeText(url).then(() => {
-        alert("Website link copied! Share it on WhatsApp, Instagram, etc.");
-      });
-    }
-    window.shareSite = shareSite;
-  </script>
+  <!-- Firebase & App Logic -->
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
