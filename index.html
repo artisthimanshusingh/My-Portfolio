@@ -3,97 +3,245 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Himanshu Singh - Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <script type="module" src="firebase.js" defer></script>
+  <title>Artist Himanshu Singh</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Raleway', sans-serif;
+      background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77, #778da9);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: url('images/starry-night.jpg') no-repeat center center/cover;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffd700;
+      transform: scale(1.1);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem;
+      color: #fff;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .art-card {
+      background: #1b263b;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .art-card img {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .art-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .actions {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+    }
+
+    .actions button {
+      background: #415a77;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .actions button:hover {
+      background: #ffd700;
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-
   <!-- Header -->
   <header>
-    <h1>Himanshu Singh</h1>
-    <p>Artist | Designer | Creator</p>
+    <div class="logo">
+      <img src="images/profile.jpg" alt="Artist Profile">
+      Artist Himanshu Singh
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </header>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Welcome to my portfolio! I’m Himanshu, an artist who loves creating unique artworks and sharing creativity with the world.</p>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <h2>Welcome to My Art Portfolio</h2>
+    <p>Discover the beauty of watercolor portraits and artistic expressions.</p>
   </section>
 
-  <!-- Gallery Section -->
-  <section id="gallery">
-    <h2>My Artworks</h2>
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <h2 style="text-align:center;">My Artworks</h2>
     <div class="gallery">
-      <!-- Example Artwork Card -->
-      <div class="art-card">
-        <img src="art1.jpg" alt="Artwork 1">
-        <div class="actions">
-          <button class="like-btn">❤️ Like</button>
-          <span class="like-count">0</span>
-          <button class="share-btn" data-url="https://your-website-link.com">🔗 Share</button>
-        </div>
-        <div class="comments">
-          <input type="text" placeholder="Add a comment..." class="comment-input">
-          <button class="comment-btn">Comment</button>
-          <ul class="comment-list"></ul>
-        </div>
-      </div>
-
-      <!-- Copy more art-card divs for more artworks -->
+      <!-- 19 Artworks -->
+      <script>
+        const gallery = Array.from({length: 19}, (_, i) => `
+          <div class="art-card">
+            <img src="images/art${i+1}.jpg" alt="Artwork ${i+1}" onclick="openImage('images/art${i+1}.jpg')">
+            <div class="actions">
+              <button onclick="likeImage(${i+1})">❤️ Like</button>
+              <button onclick="shareImage(${i+1})">🔗 Share</button>
+            </div>
+            <p id="likes-${i+1}">0 Likes</p>
+          </div>
+        `).join('');
+        document.write(gallery);
+      </script>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Email: yourname@example.com</p>
-    <p>Instagram: @yourhandle</p>
+  <!-- About -->
+  <section id="about">
+    <h2 style="text-align:center;">About Me</h2>
+    <p style="max-width:600px;margin:auto;text-align:center;">
+      Hello! I’m Himanshu Singh, an artist passionate about watercolor portraits.
+      My works aim to capture the emotions, reflections, and beauty of human experience and nature’s embrace.
+    </p>
   </section>
 
-  <!-- Footer -->
+  <!-- Contact -->
+  <section id="contact">
+    <h2 style="text-align:center;">Contact</h2>
+    <p style="text-align:center;">Email: <a href="mailto:artistherapy001@gmail.com">artistherapy001@gmail.com</a></p>
+    <p style="text-align:center;">Instagram: <a href="https://www.instagram.com/artisthimanshusingh" target="_blank">@artisthimanshusingh</a></p>
+    <p style="text-align:center;">YouTube: <a href="https://www.youtube.com/" target="_blank">My YouTube</a></p>
+    <p style="text-align:center;">TikTok: <a href="https://www.tiktok.com/" target="_blank">My TikTok</a></p>
+  </section>
+
   <footer>
-    <p>© 2025 Himanshu Singh. All Rights Reserved.</p>
+    <p>&copy; 2025 Artist Himanshu Singh. All rights reserved.</p>
   </footer>
 
-  <!-- Script for Likes/Comments/Shares -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Handle like button
-      document.querySelectorAll(".like-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          let countSpan = btn.nextElementSibling;
-          let count = parseInt(countSpan.textContent);
-          count++;
-          countSpan.textContent = count;
-        });
-      });
+  <!-- Firebase + Like/Share Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-      // Handle comments
-      document.querySelectorAll(".comment-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const input = btn.previousElementSibling;
-          const commentList = btn.nextElementSibling;
-          if (input.value.trim() !== "") {
-            const li = document.createElement("li");
-            li.textContent = input.value;
-            commentList.appendChild(li);
-            input.value = "";
-          }
-        });
-      });
+    const firebaseConfig = {
+      apiKey: "AIzaSyDDIJ0UeZUs0RzjXtLhfbj-DnvwpeBHjiU",
+      authDomain: "artisthimanshusingh-3a9cd.firebaseapp.com",
+      projectId: "artisthimanshusingh-3a9cd",
+      storageBucket: "artisthimanshusingh-3a9cd.firebasestorage.app",
+      messagingSenderId: "553538420194",
+      appId: "1:553538420194:web:2f6725a745bf2230eb8dbb",
+      measurementId: "G-9BM2G3KDMQ"
+    };
 
-      // Handle share button
-      document.querySelectorAll(".share-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const url = btn.getAttribute("data-url");
-          navigator.clipboard.writeText(url).then(() => {
-            alert("Link copied! Share it anywhere you like.");
-          });
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function likeImage(id) {
+      const ref = doc(db, "likes", `art${id}`);
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        await updateDoc(ref, { count: increment(1) });
+        document.getElementById(`likes-${id}`).innerText = (snap.data().count + 1) + " Likes";
+      } else {
+        await setDoc(ref, { count: 1 });
+        document.getElementById(`likes-${id}`).innerText = "1 Like";
+      }
+    }
+
+    function shareImage(id) {
+      const url = "https://artisthimanshusingh.github.io/My-Portfolio/";
+      if (navigator.share) {
+        navigator.share({
+          title: "Check out this artwork!",
+          url: url
         });
-      });
-    });
+      } else {
+        navigator.clipboard.writeText(url);
+        alert("Link copied! Share it anywhere.");
+      }
+    }
+
+    function openImage(src) {
+      window.open(src, "_blank");
+    }
   </script>
-
 </body>
 </html>
