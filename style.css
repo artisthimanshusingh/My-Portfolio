@@ -1,0 +1,125 @@
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #0d1117; /* dark night background */
+  color: #f0f0f0;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #1b2735, #090a0f);
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* Gallery Section */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 40px;
+}
+
+.image-card {
+  background: #161b22;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.image-card:hover {
+  transform: translateY(-5px);
+}
+
+.image-card img {
+  width: 100%;
+  display: block;
+  border-bottom: 2px solid #222;
+}
+
+/* Actions (like + share buttons) */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 15px;
+  border-top: 1px solid #222;
+}
+
+.actions button {
+  background: #238636; /* green accent */
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.actions button:hover {
+  background: #2ea043;
+}
+
+/* Comments Section */
+.comments {
+  padding: 12px 15px;
+  border-top: 1px solid #222;
+}
+
+.comments input {
+  width: 70%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #0d1117;
+  color: #f0f0f0;
+  margin-right: 5px;
+}
+
+.comments button {
+  padding: 8px 12px;
+  border: none;
+  background: #1f6feb; /* blue accent */
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.comments button:hover {
+  background: #388bfd;
+}
+
+.comments ul {
+  margin-top: 10px;
+  list-style: none;
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.comments ul li {
+  padding: 6px 0;
+  border-bottom: 1px solid #222;
+  font-size: 0.9rem;
+  color: #c9d1d9;
+}
