@@ -152,9 +152,12 @@
   <section id="gallery">
     <h2>My Artwork</h2>
     <div class="gallery">
-      <!-- Example card (repeat for 19 artworks) -->
-      <div class="card" data-id="img1">
-        <img src="images/image1.jpg" alt="Artwork 1">
+      <!-- 19 Artwork Cards -->
+      <!-- Each image named image1.jpg, image2.jpg ... image19.jpg -->
+      <!-- Loop -->
+      ${Array.from({length:19},(_,i)=>`
+      <div class="card" data-id="img${i+1}">
+        <img src="images/image${i+1}.jpg" alt="Artwork ${i+1}">
         <div class="meta">
           <button class="btn like">❤️ Like</button>
           <span class="likes">0</span>
@@ -167,25 +170,7 @@
           </form>
           <div class="comment-list"></div>
         </div>
-      </div>
-
-      <div class="card" data-id="img2">
-        <img src="images/image2.jpg" alt="Artwork 2">
-        <div class="meta">
-          <button class="btn like">❤️ Like</button>
-          <span class="likes">0</span>
-          <button class="btn share">🔗 Share</button>
-        </div>
-        <div class="comments">
-          <form>
-            <input type="text" placeholder="Write a comment..." required>
-            <button type="submit" class="btn send">Send</button>
-          </form>
-          <div class="comment-list"></div>
-        </div>
-      </div>
-
-      <!-- Repeat for all artworks -->
+      </div>`).join('')}
     </div>
   </section>
 
