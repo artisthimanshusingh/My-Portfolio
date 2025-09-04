@@ -267,13 +267,29 @@
 
   <!-- Hero slideshow (simple, non-conflicting) -->
   <script>
-    const heroSlides = document.querySelectorAll('.hero .slide');
-    let heroIndex = 0;
-    setInterval(()=>{
-      heroSlides[heroIndex].classList.remove('active');
-      heroIndex = (heroIndex + 1) % heroSlides.length;
-      heroSlides[heroIndex].classList.add('active');
-    }, 4000);
-  </script>
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+  const closeBtn = lightbox.querySelector('.close');
+
+  document.querySelectorAll('.gallery .card img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('open');
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    lightbox.classList.remove('open');
+  });
+
+  // Also close if you click outside the image
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('open');
+    }
+  });
+</script>
 </body>
 </html>
+
