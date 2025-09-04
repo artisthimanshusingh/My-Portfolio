@@ -46,18 +46,6 @@
     .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.4)}
     .card img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;cursor:pointer;transition:transform .3s}
     .card img:hover{transform:scale(1.03)}
-    .meta{display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem}
-    .btn{background:#2c5364;border:none;color:#fff;cursor:pointer;padding:.4rem .7rem;border-radius:10px;font-weight:700}
-    .btn:hover{background:var(--accent);color:#000}
-    .likes{font-weight:700}
-
-    /* Comments */
-    .comments{padding:.6rem .9rem 1rem}
-    .comments form{display:flex;gap:.5rem}
-    .comments input{flex:1;padding:.45rem .6rem;border-radius:8px;border:1px solid rgba(255,255,255,.2);
-      background:rgba(255,255,255,.08);color:var(--text)}
-    .comment-list{margin-top:.5rem;max-height:120px;overflow-y:auto;display:grid;gap:.4rem}
-    .comment{background:rgba(255,255,255,.08);padding:.4rem .6rem;border-radius:6px}
 
     /* Lightbox */
     .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;place-items:center;z-index:100}
@@ -99,7 +87,7 @@
     <div class="hero-text">
       <div>
         <h1>Welcome to My Portfolio</h1>
-        <p>Explore my artwork, videos, and projects. Click images to view full size, like, comment, and share!</p>
+        <p>Explore my artwork, videos, and projects. Click images to view full size!</p>
       </div>
     </div>
   </section>
@@ -109,22 +97,25 @@
     <h2>My Artworks</h2>
     <div class="gallery">
       <!-- 19 artwork cards -->
-      ${[...Array(19).keys()].map(i => `
-      <div class="card" data-id="art${i+1}">
-        <img src="images/art${i+1}.jpg" alt="Artwork ${i+1}">
-        <div class="meta">
-          <button class="btn like" data-id="art${i+1}">❤️ Like</button>
-          <span class="likes" data-id="art${i+1}">0</span>
-          <button class="btn share" data-id="art${i+1}">🔗 Share</button>
-        </div>
-        <div class="comments">
-          <form data-id="art${i+1}">
-            <input type="text" placeholder="Write a comment..." required>
-            <button type="submit" class="btn send">Send</button>
-          </form>
-          <div class="comment-list" data-id="art${i+1}"></div>
-        </div>
-      </div>`).join('')}
+      <div class="card"><img src="images/art1.jpg" alt="Artwork 1"></div>
+      <div class="card"><img src="images/art2.jpg" alt="Artwork 2"></div>
+      <div class="card"><img src="images/art3.jpg" alt="Artwork 3"></div>
+      <div class="card"><img src="images/art4.jpg" alt="Artwork 4"></div>
+      <div class="card"><img src="images/art5.jpg" alt="Artwork 5"></div>
+      <div class="card"><img src="images/art6.jpg" alt="Artwork 6"></div>
+      <div class="card"><img src="images/art7.jpg" alt="Artwork 7"></div>
+      <div class="card"><img src="images/art8.jpg" alt="Artwork 8"></div>
+      <div class="card"><img src="images/art9.jpg" alt="Artwork 9"></div>
+      <div class="card"><img src="images/art10.jpg" alt="Artwork 10"></div>
+      <div class="card"><img src="images/art11.jpg" alt="Artwork 11"></div>
+      <div class="card"><img src="images/art12.jpg" alt="Artwork 12"></div>
+      <div class="card"><img src="images/art13.jpg" alt="Artwork 13"></div>
+      <div class="card"><img src="images/art14.jpg" alt="Artwork 14"></div>
+      <div class="card"><img src="images/art15.jpg" alt="Artwork 15"></div>
+      <div class="card"><img src="images/art16.jpg" alt="Artwork 16"></div>
+      <div class="card"><img src="images/art17.jpg" alt="Artwork 17"></div>
+      <div class="card"><img src="images/art18.jpg" alt="Artwork 18"></div>
+      <div class="card"><img src="images/art19.jpg" alt="Artwork 19"></div>
     </div>
   </section>
 
@@ -164,11 +155,7 @@
     <img src="" alt="Expanded artwork">
   </div>
 
-  <!-- Firebase & App Scripts -->
-  <script type="module" src="firebase.js"></script>
-  <script type="module" src="script.js"></script>
-
-  <!-- Hero slideshow -->
+  <!-- Hero slideshow + Lightbox -->
   <script>
     const slides = document.querySelectorAll('.hero .slide');
     let currentSlide = 0;
